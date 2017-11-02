@@ -7,7 +7,7 @@ class Base {
  private:
     Base* child;
  public:
-    Base();
+    Base() {}
     virtual bool execute() = 0;
 };
 
