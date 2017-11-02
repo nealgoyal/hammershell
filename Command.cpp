@@ -1,23 +1,25 @@
 #include "Command.h"
 
-//  private:
-//     vector<string> commands;
+//  protected:
+//     vector<char*> commands;
 //  public:
 
+// Default Constructor
 Command::Command() {
 
 }
 
-//Constructor. Passes in a vector of strings and loads the commands vector.
-Command::Command(std::vector<std::string> input) {
-    for(int i = 0; i < input.size(); ++i) {
-        commands.at(i) = input.at(i);
-    }
+// Constructor: takes a vector of strings and loads the commands vector.
+Command::Command(std::vector<string> input) {
+    char* com = input;
+    //for(int i = 0; i < input.size(); ++i) {
+    //    commands.at(i) = input.at(i);
+    //}
 }
 
-void Command::setComVector(std::string com) {
-    commands.push_back(com);
+// Takes in a string and puts it into the vector of commands.
+void Command::setComVector(std::string input) {
+    //char com[] = input; 
+    //char*token = strtok(com, " ")
+    //commands.push_back(com);
 }
-
-
-
