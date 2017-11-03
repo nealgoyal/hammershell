@@ -10,7 +10,7 @@ class Connector : public Base {
  public:
     Connector() {}
     Connector(std::vector<char*>);
-    void setConVector(char*);
+    virtual void setConVector(char*);
     virtual bool execute();
 };
 

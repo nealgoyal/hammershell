@@ -11,6 +11,6 @@ Connector::Connector(std::vector<char*> input) {
 }
 
 // Takes in a char* and puts it into the vector of connectors.
-void setConVector(char* input) {
-    connectors.push_back(input);
-}
+//void setConVector(char* input) {
+//    connectors.push_back(input);
+//}
