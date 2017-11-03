@@ -4,13 +4,13 @@
 #include "Base.h"
 #include <vector>
 
-class Command : public Base {
+class Connector : public Base {
  protected:
-    std::vector<char*> commands;
+    std::vector<char*> connectors;
  public:
-    Command();
-    Command(std::vector<char*>);
-    void setComVector(char*);
+    Connector() {}
+    Connector(std::vector<char*>);
+    void setConVector(char*);
     virtual bool execute();
 };
 

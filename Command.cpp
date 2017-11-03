@@ -4,11 +4,6 @@
 //     vector<char*> commands;
 //  public:
 
-// Default Constructor
-Command::Command() {
-
-}
-
 // Constructor: takes a vector of char* and loads the commands vector.
 Command::Command(std::vector<char*> input) {
     commands = input;
