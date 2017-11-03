@@ -11,7 +11,7 @@ class Connector : public Base {
     Connector() {}
     Connector(std::vector<char*>);
     void setConVector(char*);
-    virtual bool execute();
+    // virtual bool execute();
 };
 
 #endif
