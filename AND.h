@@ -6,8 +6,8 @@
 class AND : public Connector {
  public:
     AND() {}
-    void setConVector();
+    void setConVector(char*);
     bool execute();
 };
 
-#endif;
+#endif
