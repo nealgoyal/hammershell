@@ -10,8 +10,10 @@ class Connector : public Base {
  public:
     Connector() {}
     Connector(std::vector<char*>);
-    virtual void setConVector(char*);
-    virtual bool execute();
+
+    void setConVector(char*);
+    // virtual bool execute();
+    void display();
 };
 
 #endif
