@@ -3,15 +3,14 @@
 
 #include "Base.h"
 #include <vector>
-#include <string>
 
 class Command : public Base {
- private:
-    std::vector<std::string> commands;
+ protected:
+    std::vector<char*> commands;
  public:
-    Command();
-    Command(std::vector<std::string>);
-    void setComVector(std::string);
+    Command() {}
+    Command(std::vector<char*>);
+    void setComVector(char*);
     virtual bool execute();
 };
 
