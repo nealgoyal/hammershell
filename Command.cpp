@@ -14,10 +14,7 @@ Command::Command(std::vector<char*> input) {
 
 // Takes in a char* and puts it into the vector of commands.
 void Command::setComVector(char* input) {
-    char delim[] = "|&;";
-    //cout << "The tokens are:" << endl;
-    char *token = strtok(input,delim);
-    commands.push_back(token);
+    commands.push_back(input);
     // Below is if it input is string; not finished.
     // char com[] = input;
     // char*token = strtok(com, " ")
