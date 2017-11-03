@@ -12,6 +12,7 @@ class Command : public Base {
     Command(std::vector<char*>);
     void setComVector(char*);
     // virtual bool execute();
+    void display();
 };
 
 #endif
