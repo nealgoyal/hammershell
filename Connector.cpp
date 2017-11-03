@@ -1,5 +1,6 @@
 #include "Connector.h"
 #include <vector>
+#include <iostream>
 
 // class Command : public Base {
 //  protected:
@@ -14,4 +15,10 @@ Connector::Connector(std::vector<char*> input) {
 // Takes in a char* and puts it into the vector of connectors.
 void Connector::setConVector(char* input) {
     connectors.push_back(input);
+}
+
+void Connector::display() {
+    for(int i = 0; i < connectors.size(); ++i) {
+        std::cout << connectors.at(i) << std::endl;
+    }
 }

@@ -1,4 +1,7 @@
 #include "Command.h"
+#include <iostream>
+#include <vector>
+
 
 //  protected:
 //     vector<char*> commands;
