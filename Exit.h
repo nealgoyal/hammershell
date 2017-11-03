@@ -5,7 +5,7 @@
 
 class Exit : public Command {
  public:
-    Exit();
+    Exit() {}
     bool execute();
 };
 
