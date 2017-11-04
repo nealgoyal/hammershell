@@ -10,5 +10,5 @@ void SEMICOLON::setConVector(char* Semicolon) {
 
 // Verifies that the && has been executed.
 bool SEMICOLON::execute() {
-
+    return false;
 }

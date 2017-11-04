@@ -10,5 +10,5 @@ void OR::setConVector(char* Or) {
 
 // Verifies that the && has been executed.
 bool OR::execute() {
-
+    return false;
 }
