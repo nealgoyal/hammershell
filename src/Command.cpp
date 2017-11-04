@@ -45,12 +45,12 @@ bool Command::execute(std::vector<char*> cmd) {
 
 // Displays all of the contents of the vector of commands.
 void Command::display() {
-    for(int i = 0; i < commands.size(); ++i) {
+    for(unsigned i = 0; i < commands.size(); ++i) {
         std::cout << commands.at(i) << std::endl;
     }
 
-    std::cout << commands.at(0) << std::endl;
-    std::cout << commands.at(1) << std::endl;
-    std::cout << commands.at(2) << std::endl;
+    //std::cout << commands.at(0) << std::endl;
+    //std::cout << commands.at(1) << std::endl;
+    //std::cout << commands.at(2) << std::endl;
 
 }

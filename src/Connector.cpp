@@ -19,7 +19,7 @@ void Connector::setConVector(char* input) {
 
 // Displays all of the contents of the vector of connectors."
 void Connector::display() {
-    for(int i = 0; i < connectors.size(); ++i) {
+    for(unsigned i = 0; i < connectors.size(); ++i) {
         std::cout << connectors.at(i) << std::endl;
     }
 }
