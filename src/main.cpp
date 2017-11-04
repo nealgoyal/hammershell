@@ -2,20 +2,17 @@
 #include "Base.h"
 #include "Command.h"
 
-int main(int argc, char *argv[]) {
-    if (argc < 2)
-    {
-      std::cout << "Error: need more arguments." << std::endl;
-      return 1;
-    }
+int main() {
 
     std::string input = "";
-    for(int i = 1; i < argc; ++i) {
-      input.append(argv[i]);
-    }
-    std::cout << input << std::endl;
-    // Command* cmd = new Command();
-    // cmd->setComVector(input);
-    // cmd->display();
+    std::cout << "$ ";
+    std::getline(std::cin,input);
+    // std::cout << input << std::endl;
+    char *cstr = new char[input.length() + 1];
+    strcpy(cstr, input.c_str());
+    // std::cout << cstr << std::endl;
+    Command* cmd = new Command();
+    cmd->setComVector(cstr);
+    cmd->display();
     return 0;
 }
