@@ -4,7 +4,7 @@
 class Base {
  public:
     Base() {}
-    virtual bool execute() = 0;
+    virtual bool execute(char*, char*) = 0;
 };
 
 #endif

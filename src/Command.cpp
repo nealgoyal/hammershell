@@ -1,6 +1,10 @@
 #include "Command.h"
 #include <iostream>
-#include <vector>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <stdlib.h>
 
 //  protected:
 //     vector<char*> commands;
@@ -17,6 +21,25 @@ void Command::setComVector(char* input) {
     //cout << "The tokens are:" << endl;
     char *token = strtok(input,delim);
     commands.push_back(token);
+}
+
+bool Command::execute(char* left, char* right) {
+    /*
+    pid_t pid = fork(); // Creates child process through fork
+    if(pid == 0) {
+        if(execvp(left, right) == -1) {
+            perror("exec");
+            return false;
+        }
+    } else if(pid > 0) {
+        if(wait(0) == -1) {
+            perror("wait");
+        }
+    } else {
+        perror("fork");
+    }
+    */
+    return false;
 }
 
 // Displays all of the contents of the vector of commands.
