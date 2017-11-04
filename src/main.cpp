@@ -12,7 +12,10 @@ int main() {
     strcpy(cstr, input.c_str());
     // std::cout << cstr << std::endl;
     Command* cmd = new Command();
+    //std::cout << 1 << std::endl;
     cmd->setComVector(cstr);
+    std::cout << "Contents of the Command Vector: " << std::endl;
     cmd->display();
+    //std::cout << 3 << std::endl;
     return 0;
 }
