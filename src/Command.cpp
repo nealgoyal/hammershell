@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 
-
 //  protected:
 //     vector<char*> commands;
 //  public:
@@ -18,14 +17,11 @@ void Command::setComVector(char* input) {
     //cout << "The tokens are:" << endl;
     char *token = strtok(input,delim);
     commands.push_back(token);
-    // Below is if it input is string; not finished.
-    // char com[] = input;
-    // char*token = strtok(com, " ")
-    // commands.push_back(com);
 }
 
+// Displays all of the contents of the vector of commands.
 void Command::display() {
-  for(int i = 0; i < commands.size(); ++i) {
-      std::cout << commands.at(i) << std::endl;
-  }
+    for(int i = 0; i < commands.size(); ++i) {
+        std::cout << commands.at(i) << std::endl;
+    }
 }
