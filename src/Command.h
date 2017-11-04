@@ -2,6 +2,7 @@
 #define COMMAND_H
 
 #include "Base.h"
+#include "string.h"
 #include <vector>
 
 class Command : public Base {
