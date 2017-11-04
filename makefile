@@ -2,7 +2,7 @@ COMPILE = g++
 FLAGS = -Wall -Werror -ansi -pedantic
 OBJS = Connector.o Command.o AND.o OR.o SEMICOLON.o Exit.o
 
-all: main.cpp $(OBJS)
+all:
 	mkdir -p ./bin
 	$(COMPILE) $(FLAGS) src/main.cpp -o ./bin/rshell
 
