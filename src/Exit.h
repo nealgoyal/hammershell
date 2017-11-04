@@ -6,7 +6,7 @@
 class Exit : public Command {
  public:
     Exit() {}
-    bool execute();
+    bool execute(std::vector<char*>);
 };
 
 #endif
