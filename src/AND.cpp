@@ -10,5 +10,5 @@ void AND::setConVector(char* And) {
 
 // Verifies that the && has been executed.
 bool AND::execute() {
-
+    return false;
 }
