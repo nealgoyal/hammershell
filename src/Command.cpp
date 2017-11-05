@@ -1,4 +1,5 @@
 #include "Command.h"
+
 #include <iostream>
 #include <unistd.h>
 #include <stdio.h>
@@ -6,21 +7,40 @@
 #include <sys/types.h>
 #include <stdlib.h>
 
+#include <algorithm>
+#include <boost/algorithm/string.hpp>
+    using namespace std;
+    using namespace boost;
 //  protected:
 //     vector<char*> commands;
 //  public:
 
 // Constructor: takes a vector of char* and loads the commands vector.
-Command::Command(std::vector<char*> input) {
+Command::Command(std::string input) {
     // commands = input;
+    this->input = input;
 }
 
 // Takes in a char* and puts it into the vector of commands.
-void Command::setComVector(char* input) {
-    char delim[] = "|&;";
-    //cout << "The tokens are:" << endl;
-    char *token = strtok(input,delim);
-    commands.push_back(token);
+void Command::setComVector(std::string str1) {
+
+  replace(str1.begin(), str1.end(), '&', '!');
+  replace(str1.begin(), str1.end(), '|', '!');
+  replace(str1.begin(), str1.end(), ';', '!');
+
+  cout << str1 << endl;
+
+  typedef vector< string > split_vector_type;
+
+  split_vector_type coms;
+  split( coms, str1, is_any_of("!"), token_compress_on );
+  // commands.size() = coms.size();
+  for(int i = 0; i < coms.size(); ++i) {
+      trim(coms.at(i));
+      commands.push_back(coms.at(i));
+      std::cout << coms.at(i) << std::endl;
+  }
+
 }
 
 bool Command::execute(std::vector<char*> cmd) {
