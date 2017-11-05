@@ -52,12 +52,16 @@ void Connector::setConVector(std::string str1) {
       std::cout << connectors.at(i) << std::endl;
   }
 
-  for( int i = 0; i < connectors.size(); ++i )
-  {
-    if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" )
-    {
-        connectors.erase( connectors.begin() + i );
+  for( int i = 0; i < connectors.size(); ++i ) {
+    std::string theCurrentWord = connectors[i];
+    if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
+        connectors.erase(connectors.begin() + 1);
+        //--i;
     }
+    //if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" ) {
+    //    connectors.erase(connectors.begin() + i);
+    //    --i;
+    //}
   }
 
     cntr.reserve(connectors.size());
