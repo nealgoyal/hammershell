@@ -18,10 +18,10 @@ int main() {
     cout << "\nCommands:" << endl;
     cmd->display();
 
-    Connector* cntr = new Connector(str1);
-    cntr->setComVector(str1);
-    cout << "\nConnectors:" << endl;
-    cntr->display();
+//    Connector* cntr = new Connector(str1);
+//    cntr->setComVector(str1);
+//    cout << "\nConnectors:" << endl;
+//    cntr->display();
 
 
     return 0;
