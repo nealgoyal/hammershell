@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "Base.h"
 #include "Command.h"
+#include "Connector.h"
 
 #include <boost/algorithm/string.hpp>
     using namespace std;
@@ -19,9 +20,12 @@ int main() {
     cmd->display();
 
     Connector* cntr = new Connector(str1);
-    cntr->setComVector(str1);
+    cntr->setConVector(str1);
     cout << "\nConnectors:" << endl;
     cntr->display();
+    //
+    // Exit* ex = new Exit();
+    // ex->execute
 
 
     return 0;

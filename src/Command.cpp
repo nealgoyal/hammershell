@@ -38,6 +38,11 @@ void Command::setComVector(std::string str1) {
   for(int i = 0; i < coms.size(); ++i) {
       trim(coms.at(i));
       commands.push_back(coms.at(i));
+      // strcpy(commands.at(i), coms.at(i).c_str());
+  }
+  cmds.reserve(commands.size());
+  for(int index = 0; index < commands.size(); ++index) {
+      cmds.push_back(commands[index].c_str());
   }
 
 }
@@ -64,8 +69,8 @@ bool Command::execute(std::vector<char*> cmd) {
 
 // Displays all of the contents of the vector of commands.
 void Command::display() {
-  for(int i = 0; i < coms.size(); ++i) {
-      std::cout << commands.at(i) << std::endl;
+  for(int i = 0; i < cmds.size(); ++i) {
+      std::cout << cmds.at(i) << std::endl;
   }
     //std::cout << commands.at(0) << std::endl;
     //std::cout << commands.at(1) << std::endl;
