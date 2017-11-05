@@ -9,5 +9,11 @@ bool Exit::execute(std::vector<char*>) {
     //     return true;
     // }
     // return false;
-    exit(0);
+    for(int i = 0; i < commands.size(); ++i) {
+      if(commands.at(i) == "exit" || commands.at(i) == "Exit") {
+          exit(0);
+          return true;
+      }
+    }
+    return false;
 }

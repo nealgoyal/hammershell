@@ -6,8 +6,8 @@
 class AND : public Connector {
  public:
     AND() {}
-    void setConVector(char*);
-    bool execute();
+    void setANDVector(char*);
+    bool execute(std::vector<char*> cmd);
 };
 
 #endif
