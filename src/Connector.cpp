@@ -59,14 +59,27 @@ void Connector::setConVector(std::string str1) {
         //--i;
     //}
     
-    if(connectors.at(i) == ";" || connectors.at(i) == "&" || connectors.at(i) == "|") {
+    if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
         tempContainer.push_back(connectors.at(i));
     }
+    //if(connectors.at(i) == ";") {
+    //    tempContainer.push_back(";");
+    //} else if(connectors.at(i) == "&") {
+    //    tempContainer.push_back("&");
+    //} else if(connectors.at(i) == "|") {
+    //    tempContainer.push_back("|");
+    //}
+
     //if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" ) {
     //    connectors.erase(connectors.begin() + i);
     //    --i;
     //}
   }
+   
+    std::cout << "Temp Container Contents: " << std:: endl;
+    for(unsigned j = 0; j < tempContainer.size(); ++j) {
+        std::cout << tempContainer.at(j) << std::endl;
+    }
 
     cntr.reserve(tempContainer.size());
     for(int index = 0; index < tempContainer.size(); ++index) {
