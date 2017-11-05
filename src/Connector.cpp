@@ -53,10 +53,14 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
-    std::string theCurrentWord = connectors[i];
-    if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
-        connectors.erase(connectors.begin() + 1);
+    //std::string theCurrentWord = connectors[i];
+    //if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
+    //    connectors.erase(connectors.begin() + 1);
         //--i;
+    //}
+    
+    if(connectors.at(i) == ";" || connectors.at(i) == "&" || connectors.at(i) == "|") {
+        tempContainer.push_back(connectors.at(i));
     }
     //if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" ) {
     //    connectors.erase(connectors.begin() + i);
@@ -64,10 +68,14 @@ void Connector::setConVector(std::string str1) {
     //}
   }
 
-    cntr.reserve(connectors.size());
-    for(int index = 0; index < connectors.size(); ++index) {
-        cntr.push_back(connectors[index].c_str());
+    cntr.reserve(tempContainer.size());
+    for(int index = 0; index < tempContainer.size(); ++index) {
+        cntr.push_back(tempContainer[index].c_str());
     }
+    //cntr.reserve(connectors.size());
+    //for(int index = 0; index < connectors.size(); ++index) {
+    //    cntr.push_back(connectors[index].c_str());
+    //}
 
 
     // string str1("abc-*-ABC-*-aBc");

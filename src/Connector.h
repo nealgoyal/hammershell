@@ -8,6 +8,7 @@
 class Connector : public Base {
  protected:
     std::vector<std::string> connectors;
+    std::vector<std::string> tempContainer;
     std::string input;
     std::vector<const char*> cntr;
  public:
