@@ -48,12 +48,7 @@ void Command::display() {
     for(unsigned i = 0; i < commands.size(); ++i) {
         std::cout << commands.at(i) << std::endl;
     }
-<<<<<<< Updated upstream
-
     //std::cout << commands.at(0) << std::endl;
     //std::cout << commands.at(1) << std::endl;
     //std::cout << commands.at(2) << std::endl;
-
-=======
->>>>>>> Stashed changes
 }
