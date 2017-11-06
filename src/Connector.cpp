@@ -10,9 +10,7 @@
 #include <stdlib.h>
 
 #include <boost/algorithm/string.hpp>
-    using namespace std;
-    using namespace boost;
-
+using namespace boost;
 using namespace std;
 
 // std::vector<char*> connectors
@@ -24,12 +22,22 @@ Connector::Connector(std::string input) {
 
 // Takes in a char* and puts it into the vector of connectors.
 void Connector::setConVector(std::string str1) {
+
+  std::string str2 = " ";
+  for(int i = 0; i < str1.length(); ++i) {
+      if(str1.at(i) == ';') {
+        // str1.insert(i, str2);
+        str1.replace(i,str1.length(),str2);
+      }
+  }
+
+  cout << str1 << endl;
+
   typedef vector< string > split_vector_type;
 
   split_vector_type cnts;
   split( cnts, str1, is_any_of(" "), token_compress_on );
   for(int i = 0; i < cnts.size(); ++i) {
-      trim(cnts.at(i));
       connectors.push_back(cnts.at(i));
   }
 
