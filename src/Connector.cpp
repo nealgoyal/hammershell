@@ -53,6 +53,7 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
+<<<<<<< Updated upstream
     //std::string theCurrentWord = connectors[i];
     //if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
     //    connectors.erase(connectors.begin() + 1);
@@ -61,6 +62,12 @@ void Connector::setConVector(std::string str1) {
     
     if(connectors.at(i) == ";" || connectors.at(i) == "&" || connectors.at(i) == "|") {
         tempContainer.push_back(connectors.at(i));
+=======
+    std::string theCurrentWord = connectors[i];
+    if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
+        connectors.erase(connectors.begin() + 1);
+        ++i;
+>>>>>>> Stashed changes
     }
     //if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" ) {
     //    connectors.erase(connectors.begin() + i);
