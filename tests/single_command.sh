@@ -1,12 +1,3 @@
 #!/bin/sh
 
-../bin/rshell << 'EOF'
-
-echo Testing single commands
-
-echo hello
-echo bye
-git status
-
-
-EOF
+../bin/rshell < single_command_check.txt #Reads in from file
