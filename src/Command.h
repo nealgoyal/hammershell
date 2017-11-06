@@ -10,7 +10,8 @@ using namespace std;
 class Command : public Base {
  protected:
     std::vector<std::string> commands;
-    std::vector<const char*> cmds;    
+    std::vector<const char*> cmds;
+    std::vector<char*> exCmd;    
     std::string input;
  public:
     Command() {}
