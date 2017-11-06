@@ -34,7 +34,6 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
-
     if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
         tempContainer.push_back(connectors.at(i));
     }
