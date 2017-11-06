@@ -44,13 +44,17 @@ void Command::setComVector(std::string str1) {
   for(int index = 0; index < commands.size(); ++index) {
       cmds.push_back(commands[index].c_str());
   }
-
+  
+  // Populates vector of char* for execute
+  for(int i = 0; i < commands.size(); ++i) {
+      exCmd[i] = &commands[i][0];
+  }
 }
 
-bool Command::execute(std::vector<char*> cmd) {
+bool Command::execute(std::vector<char*> exCmd) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-        if(execvp(cmd[0], cmd.data()) == -1) {
+        if(execvp(exCmd[0], exCmd.data()) == -1) {
             perror("Failed to Execute");
             exit(1);
         }

@@ -1,0 +1,18 @@
+echo Testing comment commands
+
+echo Test before comments
+ls -a && echo hello; echo world && git status
+echo Test before first command
+#ls -a && echo hello; echo world && git status
+echo Test before first connector
+ls -a #&& echo hello; echo world && git status
+echo Test before second command
+ls -a && #echo hello; echo world && git status
+echo Test before second connector. Should treat "#" as part of the echo
+ls -a && echo hello#; echo world && git status
+echo Test before second connector. Should NOT treat "#" as part of the echo
+ls -a && echo hello #; echo world && git status
+echo Test before third command
+ls -a && echo hello; #echo world && git status
+echo Test before third connector
+ls -a && echo hello; echo world #&& git status

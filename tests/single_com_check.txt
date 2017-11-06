@@ -1,0 +1,9 @@
+echo Testing single commands
+
+echo Test Echo
+echo Test ls
+ls
+echo Test git status
+git status
+echo Test mkdir testMkdir
+mkdir testMkdir
