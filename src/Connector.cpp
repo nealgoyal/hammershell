@@ -53,65 +53,17 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
-<<<<<<< Updated upstream
-    //std::string theCurrentWord = connectors[i];
-    //if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
-    //    connectors.erase(connectors.begin() + 1);
-        //--i;
-    //}
-    
+
     if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
         tempContainer.push_back(connectors.at(i));
-=======
-    std::string theCurrentWord = connectors[i];
-    if(theCurrentWord[i] != ';' || theCurrentWord[i] != '&' || theCurrentWord[i] != '|') {
-        connectors.erase(connectors.begin() + 1);
-        ++i;
->>>>>>> Stashed changes
     }
-    //if(connectors.at(i) == ";") {
-    //    tempContainer.push_back(";");
-    //} else if(connectors.at(i) == "&") {
-    //    tempContainer.push_back("&");
-    //} else if(connectors.at(i) == "|") {
-    //    tempContainer.push_back("|");
-    //}
-
-    //if( connectors.at(i) != ";" || connectors.at(i) != "&" || connectors.at(i) != "|" ) {
-    //    connectors.erase(connectors.begin() + i);
-    //    --i;
-    //}
   }
-   
-    std::cout << "Temp Container Contents: " << std:: endl;
-    for(unsigned j = 0; j < tempContainer.size(); ++j) {
-        std::cout << tempContainer.at(j) << std::endl;
-    }
 
-    cntr.reserve(tempContainer.size());
-    for(int index = 0; index < tempContainer.size(); ++index) {
-        cntr.push_back(tempContainer[index].c_str());
-    }
-    //cntr.reserve(connectors.size());
-    //for(int index = 0; index < connectors.size(); ++index) {
-    //    cntr.push_back(connectors[index].c_str());
-    //}
+  cntr.reserve(tempContainer.size());
+  for(int index = 0; index < tempContainer.size(); ++index) {
+      cntr.push_back(tempContainer[index].c_str());
+  }
 
-
-    // string str1("abc-*-ABC-*-aBc");
-
-    // Find all 'abc' substrings (ignoring the case)
-    // Create a find_iterator
-    // typedef find_iterator<string::iterator> string_find_iterator;
-    // for(string_find_iterator It= make_find_iterator(str1, first_finder("abc", is_iequal())); It!=string_find_iterator(); ++It)
-    // {
-    //     connectors.push_back(copy_range<std::string>(*It)) << endl;
-    // }
-
-    // Output will be:
-    // abc
-    // ABC
-    // aBC
 }
 
 bool Connector::execute(std::vector<char*> cnt) {
