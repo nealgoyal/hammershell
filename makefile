@@ -1,4 +1,4 @@
-COMPILE = g++
+COMPILE = g++ -std=c++11
 FLAGS = -Wall -Werror -ansi -pedantic
 OBJS = Connector.o Command.o AND.o OR.o SEMICOLON.o Exit.o
 

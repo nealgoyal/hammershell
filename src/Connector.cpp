@@ -26,12 +26,11 @@ void Connector::setConVector(std::string str1) {
   std::string str2 = " ";
   for(int i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
-        // str1.insert(i, str2);
-        str1.replace(i,str1.length(),str2);
+        str1.insert(i, str2);
+        i++;
+        // str1.replace(i,str1.length(),str2);
       }
   }
-
-  cout << str1 << endl;
 
   typedef vector< string > split_vector_type;
 
