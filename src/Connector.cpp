@@ -28,28 +28,9 @@ void Connector::setConVector(std::string str1) {
 
   split_vector_type cnts;
   split( cnts, str1, is_any_of(" "), token_compress_on );
-  // commands.size() = coms.size();
   for(int i = 0; i < cnts.size(); ++i) {
       trim(cnts.at(i));
       connectors.push_back(cnts.at(i));
-      // strcpy(commands.at(i), coms.at(i).c_str());
-  }
-
-  // for( std::vector<std::string>::iterator iter = connectors.begin(); iter != connectors.end(); ++iter )
-  //   {
-  //       if( *iter != ';' || *iter != '&' || *iter != '|' )
-  //       {
-  //           connectors.erase( iter );
-  //       }
-  //   }
-
-  // for (string& str1 : connectors) {
-  //     str1.erase(std::remove(str1.begin(), str1.end(), '|'), str1.end());
-  // }
-
-  std::cout << "\nConnectors Before: " << std::endl;
-  for(unsigned i = 0; i < connectors.size(); ++i) {
-      std::cout << connectors.at(i) << std::endl;
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {

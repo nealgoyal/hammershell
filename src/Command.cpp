@@ -28,7 +28,7 @@ void Command::setComVector(std::string str1) {
   replace(str1.begin(), str1.end(), '|', '!');
   replace(str1.begin(), str1.end(), ';', '!');
 
-  cout << str1 << endl;
+  // cout << str1 << endl;
 
   typedef vector< string > split_vector_type;
 
