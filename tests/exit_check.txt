@@ -1,0 +1,8 @@
+echo Testing exit command
+
+echo Testing just exit
+exit
+echo Testing and && exit
+echo Testing or || exit
+echo Testing Semicolon; exit
+echo Testing Comment #exit
