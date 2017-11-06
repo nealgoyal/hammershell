@@ -31,8 +31,6 @@ void Connector::setConVector(std::string str1) {
       }
   }
 
-  cout << str1 << endl;
-
   typedef vector< string > split_vector_type;
 
   split_vector_type cnts;
