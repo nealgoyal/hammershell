@@ -4,13 +4,14 @@
 #include "Base.h"
 #include <string>
 #include <vector>
+#include <cstring>
 
 using namespace std;
 
 class Command : public Base {
  protected:
     std::vector<std::string> commands;
-    std::vector<const char*> cmds;    
+    std::vector<char*> cmds;
     std::string input;
  public:
     Command() {}

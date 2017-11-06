@@ -40,30 +40,49 @@ void Command::setComVector(std::string str1) {
       commands.push_back(coms.at(i));
       // strcpy(commands.at(i), coms.at(i).c_str());
   }
+
+
   cmds.reserve(commands.size());
   for(int index = 0; index < commands.size(); ++index) {
-      cmds.push_back(commands[index].c_str());
+      cmds.push_back((char*)commands[index].c_str());
+      // cmds[index] = (char*)commands[index].c_str();
+      cout << cmds[index] << endl;
   }
 
+  display();
+
+  if(!execute(cmds)) {
+    cout << "NO";
+  }
+  else {
+    cout << "YES";
+  }
 }
 
 bool Command::execute(std::vector<char*> cmd) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
+        // cout << "ENTERED CHILD" << endl;
+        cout << cmd[0] << " " << cmd[1] << endl;
         if(execvp(cmd[0], cmd.data()) == -1) {
+            // cout << "ENTERED EXEC" << endl;
             perror("Failed to Execute");
-            exit(1);
+            return false;
         }
     } else if(pid > 0) { // Parent Process
+        // cout << "ENTERED PID" << endl;
         int status;
         waitpid(pid, &status, 0);
         if(WEXITSTATUS(status) == 1) {
+            // cout << "ENTERED STAT" << endl;
             return false;
         }
     } else {
+        // cout << "ENTERED PERR" << endl;
         perror("Fork Failed"); // Failed
         exit(1);
     }
+    // cout << "DONE" << endl;
     return true;
 }
 

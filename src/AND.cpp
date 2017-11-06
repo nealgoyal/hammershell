@@ -1,11 +1,26 @@
 #include "AND.h"
+#include <iostream>
 
 // class AND : public Connector {
 //  public:
 
 // Pushes back an "&" character into the connector vector.
 void AND::setANDVector(char* And) {
+  std::string str2 = " ";
+  andV.reserve(cntr.size());
+  for(int i = 0; i < cntr.size(); ++i) {
+      // std::string word = cntr[i];
+      if(cntr.at(i) == '&&') {
+        andV.push_back(cntr.at(i));
+        i++;
+        // str1.replace(i,str1.length(),str2);
+      }
+  }
 
+  std::cout << "\nAND VECTOR:" << std::endl;
+  for(int i = 0; i < andV.size(); ++i) {
+      std::cout << andV.at(i) << std::endl;
+  }
 }
 
 // Verifies that the && has been executed.

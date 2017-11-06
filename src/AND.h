@@ -4,6 +4,8 @@
 #include "Connector.h"
 
 class AND : public Connector {
+private:
+  std::vector<char*> andV;
  public:
     AND() {}
     void setANDVector(char*);

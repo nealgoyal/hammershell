@@ -41,7 +41,6 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
-
     if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
         tempContainer.push_back(connectors.at(i));
     }
@@ -51,7 +50,6 @@ void Connector::setConVector(std::string str1) {
   for(int index = 0; index < tempContainer.size(); ++index) {
       cntr.push_back(tempContainer[index].c_str());
   }
-
 }
 
 bool Connector::execute(std::vector<char*> cnt) {
