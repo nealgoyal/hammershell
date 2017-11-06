@@ -47,7 +47,7 @@ void Command::setComVector(std::string str1) {
 
 }
 
-bool Command::execute(std::vector<const char*> cmd) {
+bool Command::execute(std::vector<char*> cmd) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
         if(execvp(cmd[0], cmd.data()) == -1) {
