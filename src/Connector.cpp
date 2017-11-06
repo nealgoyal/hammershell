@@ -26,8 +26,8 @@ void Connector::setConVector(std::string str1) {
   std::string str2 = " ";
   for(int i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
-        // str1.insert(i, str2);
-        str1.replace(i,str1.length(),str2);
+        str1.insert(i, str2); 
+        i++;
       }
   }
 
@@ -42,7 +42,6 @@ void Connector::setConVector(std::string str1) {
   }
 
   for( int i = 0; i < connectors.size(); ++i ) {
-
     if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
         tempContainer.push_back(connectors.at(i));
     }
