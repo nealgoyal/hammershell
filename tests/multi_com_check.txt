@@ -1,0 +1,16 @@
+echo Testing multi commands
+
+echo Check two commands
+echo Testing AND
+echo hello && echo world
+echo Testing SEMICOLON
+git status; ls
+echo Testing OR
+mkdir testMkdir || echo hello
+echo Check three commands
+echo Testing AND and SEMICOLON
+echo bye && git status; ls
+echo Testing OR and AND
+echo Left || echo Right && echo and
+echo Test Given Example
+ls -a; echo hello && mkdir testDir || echo world; git status

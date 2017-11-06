@@ -26,12 +26,20 @@ void Connector::setConVector(std::string str1) {
   std::string str2 = " ";
   for(int i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
+<<<<<<< HEAD
         str1.insert(i, str2);
         i++;
         // str1.replace(i,str1.length(),str2);
       }
   }
 
+=======
+        str1.insert(i, str2); 
+        i++;
+      }
+  }
+
+>>>>>>> d017cb89c538326fd2381bac0f279ced38e5fb68
   typedef vector< string > split_vector_type;
 
   split_vector_type cnts;

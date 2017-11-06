@@ -48,6 +48,7 @@ void Command::setComVector(std::string str1) {
       // cmds[index] = (char*)commands[index].c_str();
       cout << cmds[index] << endl;
   }
+<<<<<<< HEAD
 
   display();
 
@@ -56,16 +57,26 @@ void Command::setComVector(std::string str1) {
   }
   else {
     cout << "YES";
+=======
+  
+  // Populates vector of char* for execute
+  for(int i = 0; i < commands.size(); ++i) {
+      exCmd[i] = &commands[i][0];
+>>>>>>> d017cb89c538326fd2381bac0f279ced38e5fb68
   }
 }
 
-bool Command::execute(std::vector<char*> cmd) {
+bool Command::execute(std::vector<char*> exCmd) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
+<<<<<<< HEAD
         // cout << "ENTERED CHILD" << endl;
         cout << cmd[0] << " " << cmd[1] << endl;
         if(execvp(cmd[0], cmd.data()) == -1) {
             // cout << "ENTERED EXEC" << endl;
+=======
+        if(execvp(exCmd[0], exCmd.data()) == -1) {
+>>>>>>> d017cb89c538326fd2381bac0f279ced38e5fb68
             perror("Failed to Execute");
             return false;
         }
