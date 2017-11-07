@@ -19,9 +19,14 @@ using namespace boost;
 // class AND : public Connector {
 //  public:
 
-// Pushes back an "&" character into the connector vector.
-SEMICOLON::SEMICOLON(std::string input) {
-    this->input = input;
+// Default Constructor
+SEMICOLON::SEMICOLON() {
+    Connector();
+}
+
+// Constructor: Sets the left and right-hand sides of the AND connector.
+SEMICOLON::SEMICOLON(Base* left, Base* right) {
+    Connector(left, right);
 }
 
 void SEMICOLON::setSEMIVector(std::string str1) {
@@ -54,25 +59,13 @@ void SEMICOLON::setSEMIVector(std::string str1) {
   }
 }
 
-// Verifies that the && has been executed.
+// Executes left and then executes right. Returns true if right executes.
 bool SEMICOLON::execute(std::vector<char*> cmd) {
-  // pid_t pid = fork(); // Creates child process through fork
-  // if(pid == 0) { // Child Process
-  //     if(execvp(cmd[0], cmd.data()) == -1) {
-  //         perror("Failed to Execute");
-  //         exit(1);
-  //     }
-  // } else if(pid > 0) { // Parent Process
-  //     int status;
-  //     waitpid(pid, &status, 0);
-  //     if(WEXITSTATUS(status) == 1) {
-  //         return false;
-  //     }
-  // } else {
-  //     perror("Fork Failed"); // Failed
-  //     exit(1);
-  // }
-  return true;
+    lhs->execute(cmd);
+    if(rhs->execute(cmd)) {
+        return true;
+    }
+    return false;
 }
 
 void SEMICOLON::display() {
