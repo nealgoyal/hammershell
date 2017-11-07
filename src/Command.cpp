@@ -15,10 +15,21 @@ using namespace boost;
 //     vector<char*> commands;
 //  public:
 
+Command::Command() {
+    cmdPtr = NULL;
+}
+
 // Constructor: takes a vector of char* and loads the commands vector.
-Command::Command(std::string input) {
-    // commands = input;
-    this->input = input;
+Command::Command(vector<char*> input) {
+    if(input.size() != 0) {
+        cmdPtr = input.at(0);
+        data = input.at(0);
+    }
+}
+
+// Returns the data when pointed to in the main
+string Command::getData() {
+    return data;
 }
 
 // Takes in a char* and puts it into the vector of commands.
