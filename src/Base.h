@@ -7,5 +7,4 @@ class Base {
     Base() {}
     virtual bool execute(std::vector<char*>) = 0;
 };
-
 #endif
