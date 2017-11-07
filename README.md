@@ -13,7 +13,11 @@ This program will mimic a linux or unix terminal. The program will run by allowi
 ```c++
  $ ls -a; echo hello; mkdir test
 ```
-
+## Requirements
+Need to install the boost library to run the program. To get instructions on how to install, follow the website here: https://www.pyimagesearch.com/2015/04/27/installing-boost-and-boost-python-on-osx-with-homebrew/. Also, you need to compile using C++11. In order to compile, you can either run our makefile or use the command
+```c++
+  $ g++ *.cpp -std=c++11
+```
 ## Scripts
 In this lab, we used scripts to thoroughly test all the commands.
 ```c++
@@ -33,3 +37,7 @@ $ bin/rshell
 ```
 
 ## Known Bugs
+- We currently cannot account for non bin items, such as commands like "cd".
+- Issues with shell scripts running accordingly to each test.
+- Cannot account for quotations within the commands
+- Will run with a connector at the end of the program
