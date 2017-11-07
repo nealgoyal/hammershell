@@ -9,8 +9,8 @@
 
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
-    using namespace std;
-    using namespace boost;
+using namespace std;
+using namespace boost;
 //  protected:
 //     vector<char*> commands;
 //  public:
@@ -35,7 +35,7 @@ void Command::setComVector(std::string str1) {
     split_vector_type coms;
     split( coms, str1, is_any_of("!"), token_compress_on );
     // commands.size() = coms.size();
-    for(int i = 0; i < coms.size(); ++i) {
+    for(unsigned i = 0; i < coms.size(); ++i) {
         trim(coms.at(i));
         commands.push_back(coms.at(i));
         // strcpy(commands.at(i), coms.at(i).c_str());
@@ -43,7 +43,7 @@ void Command::setComVector(std::string str1) {
 
     cmdVec.reserve(commands.size());
     cmds.reserve(commands.size());
-    for(int index = 0; index < commands.size(); ++index) {
+    for(unsigned index = 0; index < commands.size(); ++index) {
         cmds.push_back((char*)commands[index].c_str());
         cmdVec.push_back((char*)commands[index].c_str());
         // cmds[index] = (char*)commands[index].c_str();
@@ -94,7 +94,7 @@ bool Command::execute(std::vector<char*> exCmd) {
 
 // Displays all of the contents of the vector of commands.
 void Command::display() {
-  for(int i = 0; i < cmds.size(); ++i) {
+  for(unsigned i = 0; i < cmds.size(); ++i) {
       std::cout << cmds.at(i) << std::endl;
   }
     //std::cout << commands.at(0) << std::endl;

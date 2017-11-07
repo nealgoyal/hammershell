@@ -23,9 +23,9 @@ int main() {
     std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
 
     std::vector<char*> check;
-    Base* root = NULL;
-    Base* left = NULL;
-    Base* right = NULL;
+    //Base* root = NULL;
+    //Base* left = NULL;
+    //Base* right = NULL;
 
     if(str1 == "exit") {
         Exit *bye = new Exit();
@@ -46,11 +46,11 @@ int main() {
     std::vector<char*> connector = cntr->getConVector();
     std::vector<char*> command = cmd->getComVector();
 
-    cout << "\nConnector Vector: " << endl;
-    for(int i = 0; i < connector.size(); ++i) {
-        std::cout << connector.at(i) << ", ";
-    }
-    std::cout << std::endl;
+    //cout << "\nConnector Vector: " << endl;
+    //for(unsigned i = 0; i < connector.size(); ++i) {
+    //    std::cout << connector.at(i) << ", ";
+    //}
+    //std::cout << std::endl;
     
     //Convert into type Base*
     // std::vector<Base*> conTree;
@@ -104,8 +104,6 @@ int main() {
     sc->setSEMIVector(str1);
     cout << "\nSEMICOLON:" << endl;
     sc->display();
-
-    
 
     return 0;
 }

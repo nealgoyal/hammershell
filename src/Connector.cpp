@@ -31,7 +31,7 @@ Connector::Connector(Base* left, Base* right) {
 void Connector::setConVector(std::string str1) {
 
     std::string str2 = " ";
-    for(int i = 0; i < str1.length(); ++i) {
+    for(unsigned i = 0; i < str1.length(); ++i) {
         if(str1.at(i) == ';') {
             str1.insert(i, str2);
             i++;
@@ -42,18 +42,18 @@ void Connector::setConVector(std::string str1) {
 
     split_vector_type cnts;
     split( cnts, str1, is_any_of(" "), token_compress_on );
-    for(int i = 0; i < cnts.size(); ++i) {
+    for(unsigned i = 0; i < cnts.size(); ++i) {
         connectors.push_back(cnts.at(i));
     }
 
-    for( int i = 0; i < connectors.size(); ++i ) {
+    for(unsigned i = 0; i < connectors.size(); ++i ) {
         if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
             tempContainer.push_back(connectors.at(i));
         }
     }
 
     cntr.reserve(tempContainer.size());
-    for(int index = 0; index < tempContainer.size(); ++index) {
+    for(unsigned index = 0; index < tempContainer.size(); ++index) {
         cntr.push_back((char*)tempContainer[index].c_str());
     }
 }

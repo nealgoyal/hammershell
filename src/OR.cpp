@@ -32,7 +32,7 @@ OR::OR(Base* left, Base* right) {
 void OR::setORVector(std::string str1) {
 
   std::string str2 = " ";
-  for(int i = 0; i < str1.length(); ++i) {
+  for(unsigned i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
         str1.insert(i, str2);
         i++;
@@ -43,18 +43,18 @@ void OR::setORVector(std::string str1) {
 
   split_vector_type cnts;
   split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(int i = 0; i < cnts.size(); ++i) {
+  for(unsigned i = 0; i < cnts.size(); ++i) {
       ors.push_back(cnts.at(i));
   }
 
-  for( int i = 0; i < ors.size(); ++i ) {
+  for(unsigned i = 0; i < ors.size(); ++i ) {
     if(ors.at(i) == "||") {
         tempOV.push_back(ors.at(i));
     }
   }
 
   orV.reserve(tempOV.size());
-  for(int index = 0; index < tempOV.size(); ++index) {
+  for(unsigned index = 0; index < tempOV.size(); ++index) {
       orV.push_back((char*)tempOV[index].c_str());
   }
 }
