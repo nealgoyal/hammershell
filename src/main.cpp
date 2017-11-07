@@ -23,16 +23,16 @@ int main() {
     std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
 
     std::vector<char*> check;
-    //Base* root = NULL;
-    //Base* left = NULL;
-    //Base* right = NULL;
+    // Base* root = NULL;
+    // Base* left = NULL;
+    // Base* right = NULL;
 
     if(str1 == "exit") {
         Exit *bye = new Exit();
         bye->execute(check);
     }
 
-    Command* cmd = new Command(str1);
+    Command* cmd = new Command();
     cmd->setComVector(str1);
     cout << "\nCommands:" << endl;
     cmd->display();
@@ -46,27 +46,23 @@ int main() {
     std::vector<char*> connector = cntr->getConVector();
     std::vector<char*> command = cmd->getComVector();
 
-    //cout << "\nConnector Vector: " << endl;
-    //for(unsigned i = 0; i < connector.size(); ++i) {
-    //    std::cout << connector.at(i) << ", ";
-    //}
-    //std::cout << std::endl;
-    
-    //Convert into type Base*
-    // std::vector<Base*> conTree;
-    // std::vector<char*>::iterator it;
-    // for(it == connector.begin(); it != connector.end(); ++it) {
-    //     conTree.push_back(dynamic_cast<Base*>(*it));
+    cout << "\nCommand Vector: " << endl;
+    for(unsigned i = 0; i < command.size(); ++i) {
+       std::cout << command.at(i) << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "First command: " << command.at(0) << std::endl;
+    Command* temp = new Command(command);
+    std::cout << "Temp value: " << temp->getData() << std::endl;
+    // Base* root = temp;
+    // std::cout << "Root: " << *root << std::endl;
+    // Populates a tree that stores both vectors and commands
+    // if(connector.size() == 0) {
+    //     root = cmd;
     // }
-
-    // Populates a basic tree
-    // if(connector.size() == 1) {
-    //     // Grab the last two commands
-    //     right = command.back();
-    //     command.pop_back();
-    //     left = command.back();
-    //     command.pop_back();
-
+    // for(unsigned i = 0; i < connector.size(); ++i) {
+        
     //     char* conType = connector.back();
     //     connector.pop_back();
 
@@ -107,3 +103,16 @@ int main() {
 
     return 0;
 }
+
+//cout << "\nConnector Vector: " << endl;
+    //for(unsigned i = 0; i < connector.size(); ++i) {
+    //    std::cout << connector.at(i) << ", ";
+    //}
+    //std::cout << std::endl;
+    
+    //Convert into type Base*
+    // std::vector<Base*> conTree;
+    // std::vector<char*>::iterator it;
+    // for(it == connector.begin(); it != connector.end(); ++it) {
+    //     conTree.push_back(dynamic_cast<Base*>(*it));
+    // }
