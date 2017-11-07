@@ -24,48 +24,53 @@ Command::Command(std::string input) {
 // Takes in a char* and puts it into the vector of commands.
 void Command::setComVector(std::string str1) {
 
-  replace(str1.begin(), str1.end(), '&', '!');
-  replace(str1.begin(), str1.end(), '|', '!');
-  replace(str1.begin(), str1.end(), ';', '!');
+    replace(str1.begin(), str1.end(), '&', '!');
+    replace(str1.begin(), str1.end(), '|', '!');
+    replace(str1.begin(), str1.end(), ';', '!');
 
-  // cout << str1 << endl;
+    // cout << str1 << endl;
 
-  typedef vector< string > split_vector_type;
+    typedef vector< string > split_vector_type;
 
-  split_vector_type coms;
-  split( coms, str1, is_any_of("!"), token_compress_on );
-  // commands.size() = coms.size();
-  for(int i = 0; i < coms.size(); ++i) {
-      trim(coms.at(i));
-      commands.push_back(coms.at(i));
-      // strcpy(commands.at(i), coms.at(i).c_str());
-  }
+    split_vector_type coms;
+    split( coms, str1, is_any_of("!"), token_compress_on );
+    // commands.size() = coms.size();
+    for(int i = 0; i < coms.size(); ++i) {
+        trim(coms.at(i));
+        commands.push_back(coms.at(i));
+        // strcpy(commands.at(i), coms.at(i).c_str());
+    }
 
+    cmdVec.reserve(commands.size());
+    cmds.reserve(commands.size());
+    for(int index = 0; index < commands.size(); ++index) {
+        cmds.push_back((char*)commands[index].c_str());
+        cmdVec.push_back((char*)commands[index].c_str());
+        // cmds[index] = (char*)commands[index].c_str();
+        // cout << cmds[index] << endl;
+    }
+    //
+    // if(!execute(cmds)) {
+    //   cout << "NO";
+    // }
+    // else {
+    //   cout << "YES";
+    // }
 
-  cmds.reserve(commands.size());
-  for(int index = 0; index < commands.size(); ++index) {
-      cmds.push_back((char*)commands[index].c_str());
-      // cmds[index] = (char*)commands[index].c_str();
-      // cout << cmds[index] << endl;
-  }
-  //
-  // if(!execute(cmds)) {
-  //   cout << "NO";
-  // }
-  // else {
-  //   cout << "YES";
-  // }
+    // Populates vector of char* for execute
+    // for(int i = 0; i < commands.size(); ++i) {
+    //     exCmd[i] = &commands[i][0];
+    // }
+    // execute(exCmd); -> Seg fault
+}
 
-  // Populates vector of char* for execute
-  // for(int i = 0; i < commands.size(); ++i) {
-  //     exCmd[i] = &commands[i][0];
-  // }
+std::vector<char*> Command::getComVector() {
+    return cmdVec;
 }
 
 bool Command::execute(std::vector<char*> exCmd) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-
         if(execvp(exCmd[0], exCmd.data()) == -1) {
             perror("Failed to Execute");
             return false;

@@ -30,32 +30,36 @@ Connector::Connector(Base* left, Base* right) {
 // Takes in a string and puts it into the vector of connectors.
 void Connector::setConVector(std::string str1) {
 
-  std::string str2 = " ";
-  for(int i = 0; i < str1.length(); ++i) {
-      if(str1.at(i) == ';') {
-        str1.insert(i, str2);
-        i++;
-      }
-  }
-
-  typedef vector< string > split_vector_type;
-
-  split_vector_type cnts;
-  split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(int i = 0; i < cnts.size(); ++i) {
-      connectors.push_back(cnts.at(i));
-  }
-
-  for( int i = 0; i < connectors.size(); ++i ) {
-    if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
-        tempContainer.push_back(connectors.at(i));
+    std::string str2 = " ";
+    for(int i = 0; i < str1.length(); ++i) {
+        if(str1.at(i) == ';') {
+            str1.insert(i, str2);
+            i++;
+        }
     }
-  }
 
-  cntr.reserve(tempContainer.size());
-  for(int index = 0; index < tempContainer.size(); ++index) {
-      cntr.push_back((char*)tempContainer[index].c_str());
-  }
+    typedef vector< string > split_vector_type;
+
+    split_vector_type cnts;
+    split( cnts, str1, is_any_of(" "), token_compress_on );
+    for(int i = 0; i < cnts.size(); ++i) {
+        connectors.push_back(cnts.at(i));
+    }
+
+    for( int i = 0; i < connectors.size(); ++i ) {
+        if(connectors.at(i) == ";" || connectors.at(i) == "&&" || connectors.at(i) == "||") {
+            tempContainer.push_back(connectors.at(i));
+        }
+    }
+
+    cntr.reserve(tempContainer.size());
+    for(int index = 0; index < tempContainer.size(); ++index) {
+        cntr.push_back((char*)tempContainer[index].c_str());
+    }
+}
+
+std::vector<char*> Connector::getConVector() {
+    return cntr;
 }
 
 bool Connector::execute(std::vector<char*> cnt) {
