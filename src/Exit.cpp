@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 // Simply exits the program.
-bool Exit::execute(std::vector<char*>) {
+bool Exit::execute(std::vector<char*> cmd) {
     exit(0);
     return true;
     /*

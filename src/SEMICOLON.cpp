@@ -32,7 +32,7 @@ SEMICOLON::SEMICOLON(Base* left, Base* right) {
 void SEMICOLON::setSEMIVector(std::string str1) {
 
   std::string str2 = " ";
-  for(int i = 0; i < str1.length(); ++i) {
+  for(unsigned i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
         str1.insert(i, str2);
         i++;
@@ -43,18 +43,18 @@ void SEMICOLON::setSEMIVector(std::string str1) {
 
   split_vector_type cnts;
   split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(int i = 0; i < cnts.size(); ++i) {
+  for(unsigned i = 0; i < cnts.size(); ++i) {
       semis.push_back(cnts.at(i));
   }
 
-  for( int i = 0; i < semis.size(); ++i ) {
+  for(unsigned i = 0; i < semis.size(); ++i ) {
     if(semis.at(i) == ";") {
         tempSCV.push_back(semis.at(i));
     }
   }
 
   semiV.reserve(tempSCV.size());
-  for(int index = 0; index < tempSCV.size(); ++index) {
+  for(unsigned index = 0; index < tempSCV.size(); ++index) {
       semiV.push_back((char*)tempSCV[index].c_str());
   }
 }

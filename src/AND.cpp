@@ -32,7 +32,7 @@ AND::AND(Base* left, Base* right) {
 void AND::setANDVector(std::string str1) {
 
   std::string str2 = " ";
-  for(int i = 0; i < str1.length(); ++i) {
+  for(unsigned i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
         str1.insert(i, str2);
         i++;
@@ -43,18 +43,18 @@ void AND::setANDVector(std::string str1) {
 
   split_vector_type cnts;
   split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(int i = 0; i < cnts.size(); ++i) {
+  for(unsigned i = 0; i < cnts.size(); ++i) {
       ands.push_back(cnts.at(i));
   }
 
-  for( int i = 0; i < ands.size(); ++i ) {
+  for(unsigned i = 0; i < ands.size(); ++i ) {
     if(ands.at(i) == "&&") {
         tempAV.push_back(ands.at(i));
     }
   }
 
   andV.reserve(tempAV.size());
-  for(int index = 0; index < tempAV.size(); ++index) {
+  for(unsigned index = 0; index < tempAV.size(); ++index) {
       andV.push_back((char*)tempAV[index].c_str());
   }
 }
