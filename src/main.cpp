@@ -14,9 +14,11 @@
 
 int main() {
 
-    std::string str1 = "";
+    std::string oldstr = "";
     std::cout << "$ ";
-    std::getline(std::cin,str1);
+    std::getline(std::cin,oldstr);
+
+    std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
 
     Command* cmd = new Command(str1);
     cmd->setComVector(str1);
