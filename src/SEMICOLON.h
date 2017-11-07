@@ -7,11 +7,10 @@ class SEMICOLON : public Connector {
 private:
   std::vector<std::string> semis;
   std::vector<std::string> tempSCV;
-  std::string input;
   std::vector<char*> semiV;
  public:
-    SEMICOLON() {}
-    SEMICOLON(std::string);
+    SEMICOLON();
+    SEMICOLON(Base*, Base*);
     void setSEMIVector(std::string);
     bool execute(std::vector<char*> cmd);
     void display();

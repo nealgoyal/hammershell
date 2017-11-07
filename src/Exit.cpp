@@ -2,8 +2,11 @@
 #include <iostream>
 #include <cstdlib>
 
-// Checks if there are any commands in the vector. If not, exit and return true.
+// Simply exits the program.
 bool Exit::execute(std::vector<char*>) {
+    exit(0);
+    return true;
+    /*
     // if(commands.empty()) {
     //     exit(0);
     //     return true;
@@ -16,4 +19,5 @@ bool Exit::execute(std::vector<char*>) {
       }
     }
     return false;
+    */
 }

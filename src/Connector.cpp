@@ -15,12 +15,19 @@ using namespace std;
 
 // std::vector<char*> connectors
 
-// Constructor: takes a vector of char* and loads the connectors vector.
-Connector::Connector(std::string input) {
-    this->input = input;
+// Default Constructor
+Connector::Connector() {
+    lhs = NULL;
+    rhs = NULL;
 }
 
-// Takes in a char* and puts it into the vector of connectors.
+// Constructor: Sets the left and right-hand sides of the connector.
+Connector::Connector(Base* left, Base* right) {
+    lhs = left;
+    rhs = right;
+}
+
+// Takes in a string and puts it into the vector of connectors.
 void Connector::setConVector(std::string str1) {
 
   std::string str2 = " ";
