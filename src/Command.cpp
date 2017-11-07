@@ -22,10 +22,17 @@ Command::Command() {
 // Constructor: takes a vector of char* and loads the commands vector.
 Command::Command(vector<char*> input) {
     if(input.size() != 0) {
-        cmdPtr = input.at(0);
-        data = input.at(0);
+        cmdPtr = input.back();
+        data = input.back();
     }
 }
+
+// Destructor: deletes the command pointer
+// Command::~Command() {
+//     if(cmdPtr != NULL) {
+//         delete cmdPtr;
+//     }
+// }
 
 // Returns the data when pointed to in the main
 string Command::getData() {
@@ -75,14 +82,16 @@ void Command::setComVector(std::string str1) {
     // execute(exCmd); -> Seg fault
 }
 
-std::vector<char*> Command::getComVector() {
-    return cmdVec;
+std::vector<char*> Command::getComVectorReversed() {
+    revCmd = cmdVec;
+    std::reverse(revCmd.begin(), revCmd.end());
+    return revCmd;
 }
 
-bool Command::execute(std::vector<char*> exCmd) {
+bool Command::execute(std::vector<char*> cmdVec) {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-        if(execvp(exCmd[0], exCmd.data()) == -1) {
+        if(execvp(cmdVec[0], cmdVec.data()) == -1) {
             perror("Failed to Execute");
             return false;
         }

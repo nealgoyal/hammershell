@@ -15,14 +15,14 @@ class Command : public Base {
     std::vector<std::string> commands;
     std::vector<const char*> cmds;
     std::vector<char*> cmdVec;
-    std::vector<char*> exCmd;
+    std::vector<char*> revCmd;
     std::string input;
  public:
     Command();
     Command(vector<char*>);
     string getData();    
     void setComVector(std::string);
-    std::vector<char*> getComVector();
+    std::vector<char*> getComVectorReversed();
     virtual bool execute(std::vector<char*>);
     void display();
 };
