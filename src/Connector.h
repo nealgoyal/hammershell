@@ -6,7 +6,7 @@
 #include <string>
 
 class Connector : public Base {
- protected:
+public:
     std::vector<std::string> connectors;
     std::vector<std::string> tempContainer;
     std::string input;

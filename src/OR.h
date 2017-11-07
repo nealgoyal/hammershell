@@ -4,10 +4,17 @@
 #include "Connector.h"
 
 class OR : public Connector {
+private:
+  std::vector<std::string> ors;
+  std::vector<std::string> tempOV;
+  std::string input;
+  std::vector<char*> orV;
  public:
     OR() {}
-    void setConVector(char*);
-    bool execute();
+    OR(std::string);
+    void setORVector(std::string);
+    bool execute(std::vector<char*> cmd);
+    void display();
 };
 
 #endif

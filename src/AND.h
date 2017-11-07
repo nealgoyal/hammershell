@@ -5,11 +5,16 @@
 
 class AND : public Connector {
 private:
-  std::vector<std::string> tempV;
+  std::vector<std::string> ands;
+  std::vector<std::string> tempAV;
+  std::string input;
+  std::vector<char*> andV;
  public:
     AND() {}
-    void setANDVector(char*);
+    AND(std::string);
+    void setANDVector(std::string);
     bool execute(std::vector<char*> cmd);
+    void display();
 };
 
 #endif

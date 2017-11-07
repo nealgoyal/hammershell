@@ -4,10 +4,17 @@
 #include "Connector.h"
 
 class SEMICOLON : public Connector {
+private:
+  std::vector<std::string> semis;
+  std::vector<std::string> tempSCV;
+  std::string input;
+  std::vector<char*> semiV;
  public:
     SEMICOLON() {}
-    void setConVector(char*);
-    bool execute();
+    SEMICOLON(std::string);
+    void setSEMIVector(std::string);
+    bool execute(std::vector<char*> cmd);
+    void display();
 };
 
 #endif
