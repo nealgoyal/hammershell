@@ -26,20 +26,11 @@ void Connector::setConVector(std::string str1) {
   std::string str2 = " ";
   for(int i = 0; i < str1.length(); ++i) {
       if(str1.at(i) == ';') {
-<<<<<<< HEAD
         str1.insert(i, str2);
         i++;
-        // str1.replace(i,str1.length(),str2);
       }
   }
 
-=======
-        str1.insert(i, str2); 
-        i++;
-      }
-  }
-
->>>>>>> d017cb89c538326fd2381bac0f279ced38e5fb68
   typedef vector< string > split_vector_type;
 
   split_vector_type cnts;
@@ -56,27 +47,27 @@ void Connector::setConVector(std::string str1) {
 
   cntr.reserve(tempContainer.size());
   for(int index = 0; index < tempContainer.size(); ++index) {
-      cntr.push_back(tempContainer[index].c_str());
+      cntr.push_back((char*)tempContainer[index].c_str());
   }
 }
 
 bool Connector::execute(std::vector<char*> cnt) {
-    pid_t pid = fork(); // Creates child process through fork
-    if(pid == 0) { // Child Process
-        if(execvp(cnt[0], cnt.data()) == -1) {
-            perror("Failed to Execute");
-            exit(1);
-        }
-    } else if(pid > 0) { // Parent Process
-        int status;
-        waitpid(pid, &status, 0);
-        if(WEXITSTATUS(status) == 1) {
-            return false;
-        }
-    } else {
-        perror("Fork Failed"); // Failed
-        exit(1);
-    }
+    // pid_t pid = fork(); // Creates child process through fork
+    // if(pid == 0) { // Child Process
+    //     if(execvp(cnt[0], cnt.data()) == -1) {
+    //         perror("Failed to Execute");
+    //         exit(1);
+    //     }
+    // } else if(pid > 0) { // Parent Process
+    //     int status;
+    //     waitpid(pid, &status, 0);
+    //     if(WEXITSTATUS(status) == 1) {
+    //         return false;
+    //     }
+    // } else {
+    //     perror("Fork Failed"); // Failed
+    //     exit(1);
+    // }
     return true;
 }
 

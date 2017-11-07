@@ -63,6 +63,26 @@ int main() {
         finConnectors.push_back((char*)connectors[index].c_str());
     }
 
+    //displays
+
+    //connectors
+    cout << "\nConnectors: " << endl;
+    for(int index = 0; index < finConnectors.size(); ++index) {
+        cout << finConnectors[index] << endl;
+    }
+
+    //commands
+    cout << "\nCommands: " << endl;
+    for(int index = 0; index < finCommands.size(); ++index) {
+        cout << finCommands[index] << endl;
+    }
+
+    cout << "\nOverall: " << endl;
+    //overall
+    for(int index = 0; index < finTemp.size(); ++index) {
+        cout << finTemp[index] << endl;
+    }
+
     //sys calls
     bool notGood = false;
     bool Good = true;
@@ -71,10 +91,9 @@ int main() {
 
     for(int i = 0; i < finTemp.size(); ++i) {
         if(temp.at(i) == "||") {
-            strcpy(arr[i], finTemp[i]);
-            p->execute(arr[i]);
-            if(p->execute(arr[i]) == Good) {
-                p->execute(arr[i]);
+            p->execute(finTemp);
+            if(p->execute(finTemp) == Good) {
+                p->execute(finTemp);
             }
         }
     }

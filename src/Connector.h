@@ -10,7 +10,7 @@ class Connector : public Base {
     std::vector<std::string> connectors;
     std::vector<std::string> tempContainer;
     std::string input;
-    std::vector<const char*> cntr;
+    std::vector<char*> cntr;
  public:
     Connector() {}
     Connector(std::string);

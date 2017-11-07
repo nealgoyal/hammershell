@@ -8,9 +8,9 @@
 void AND::setANDVector(char* And) {
   std::string str2 = " ";
   andV.reserve(cntr.size());
-  for(int i = 0; i < cntr.size(); ++i) {
+  for(int i = 0; i < tempContainer.size(); ++i) {
       // std::string word = cntr[i];
-      if(cntr.at(i) == '&&') {
+      if(tempContainer.at(i) == "&&") {
         andV.push_back(cntr.at(i));
         i++;
         // str1.replace(i,str1.length(),str2);

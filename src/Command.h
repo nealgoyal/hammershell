@@ -11,12 +11,8 @@ using namespace std;
 class Command : public Base {
  protected:
     std::vector<std::string> commands;
-<<<<<<< HEAD
-    std::vector<char*> cmds;
-=======
     std::vector<const char*> cmds;
-    std::vector<char*> exCmd;    
->>>>>>> d017cb89c538326fd2381bac0f279ced38e5fb68
+    std::vector<char*> exCmd;
     std::string input;
  public:
     Command() {}

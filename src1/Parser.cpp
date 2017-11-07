@@ -17,14 +17,14 @@ using namespace std;
 using namespace boost;
 
 Parser::Parser() {}
-Parser::Parser(vector <string> input) {
+Parser::Parser(vector <char*> input) {
     inp = input;
 }
 
-bool Parser::execute(char * cmd) {
+bool Parser::execute(vector <char*> cmd) {
   pid_t pid = fork(); // Creates child process through fork
   if(pid == 0) { // Child Process
-      if(execvp(cmd[0], cmd) == -1) {
+      if(execvp(cmd[0], cmd.data()) == -1) {
           perror("Failed to Execute");
           return false;
       }

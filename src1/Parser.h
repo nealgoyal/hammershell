@@ -10,9 +10,9 @@ private:
   vector < char* > inp;
  public:
     Parser ();
-    Parser (vector < string > );
+    Parser (vector < char* > );
 
-    bool execute(char *);
+    bool execute(vector <char*> );
 };
 
 #endif

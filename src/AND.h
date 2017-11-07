@@ -5,7 +5,7 @@
 
 class AND : public Connector {
 private:
-  std::vector<char*> andV;
+  std::vector<std::string> tempV;
  public:
     AND() {}
     void setANDVector(char*);
