@@ -7,13 +7,14 @@
 
 class Connector : public Base {
 public:
+    Base* lhs;
+    Base* rhs;
     std::vector<std::string> connectors;
     std::vector<std::string> tempContainer;
-    std::string input;
     std::vector<char*> cntr;
  public:
-    Connector() {}
-    Connector(std::string);
+    Connector();
+    Connector(Base*, Base*);
     void setConVector(std::string);
     virtual bool execute(std::vector<char*>);
     void display();
