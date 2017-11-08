@@ -71,19 +71,16 @@ std::vector<char*> Command::getComVectorReversed() {
 bool Command::execute() {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-        char* ex[420];
+        // char* ex[100];
         // for(unsigned i = 0; cmdPtr[i] != ' '; ++i) {
         //     ex[i] = cmdPtr[i];
         // }
-        // std::string space = " ";
-        // for(int i = 0; data[i] != space; ++i) {
-        //     ex[i] = data[i];
+        // std::cout << "Executable: " << ex << ", arguments: " << cmdPtr << std::endl;
+        
+        // if(execvp(ex[0], ex) == -1) {
+        //     perror("Failed to Execute");
+        //     return false;
         // }
-        std::cout << "Executable: " << ex << ", arguments: " << cmdPtr << std::endl;
-        if(execvp(ex[0], ex) == -1) {
-            perror("Failed to Execute");
-            return false;
-        }
     } else if(pid > 0) { // Parent Process
         // cout << "ENTERED PID" << endl;
         int status;

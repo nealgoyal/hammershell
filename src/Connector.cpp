@@ -71,6 +71,10 @@ std::vector<char*> Connector::getConVectorReversed() {
     return revCntr;
 }
 
+bool Connector::execute() {
+    return true;
+}
+
 // Displays all of the contents of the vector of connectors."
 void Connector::display() {
     for(unsigned i = 0; i < cntr.size(); ++i) {

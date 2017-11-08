@@ -74,7 +74,7 @@ int main() {
         // Sets first connector when command is the lhs
         if(connector.size() != 0) {
             Command* right = new Command(command);
-            std::cout << "Command 2: " << right->getData() << endl;
+            // std::cout << "Command 2: " << right->getData() << endl;
             command.pop_back();
             
             // Points at last c_string in connector
@@ -108,7 +108,7 @@ int main() {
             // Points at last c_string in connector vector
             conType = connector.back();
             connector.pop_back();
-            cout << "conType: " << conType << endl;
+            // cout << "conType: " << conType << endl;
 
             // Checks which connector is passed in.
             // Sets lhs to connector and rhs to command(if it exists).
