@@ -25,7 +25,7 @@ Connector::Connector() {
 Connector::Connector(Base* left, Base* right) {
     if(left != NULL) {
         lhs = left;
-    } else if(right != NULL) {
+    } if(right != NULL) {
         rhs = right;
     }
 }

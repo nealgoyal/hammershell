@@ -20,28 +20,28 @@ int main() {
         std::string oldstr = "";
         std::cout << "$ ";
         std::getline(std::cin, oldstr);
-    
+
         std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
-    
+
         if(str1 == "exit") {
             Exit *bye = new Exit();
             bye->execute();
         }
-    
+
         Command* cmd = new Command();
         cmd->setComVector(str1);
         // cout << "\nCommands:" << endl;
         // cmd->display();
-    
+
         Connector* cntr = new Connector();
         cntr->setConVector(str1);
         // cout << "\nConnectors:" << endl;
         // cntr->display();
-    
+
         //Turn these pointers into vectors
         std::vector<char*> connector = cntr->getConVectorReversed();
         std::vector<char*> command = cmd->getComVectorReversed();
-    
+
         // std::cout << "First command: " << command.at(0) << std::endl;
         // Always initialize root to the first command
         Command* left = new Command(command);
@@ -63,7 +63,7 @@ int main() {
             Command* right = new Command(command);
             // std::cout << "Command 2: " << right->getData() << endl;
             command.pop_back();
-            
+
             // Points at last c_string in connector
             conType = connector.back();
             connector.pop_back();
@@ -91,7 +91,7 @@ int main() {
             Command* rightSide = new Command(command);
             // std::cout << "Next Command " << ": " << rightSide->getData() << endl;
             command.pop_back();
-            
+
             // Points at last c_string in connector vector
             conType = connector.back();
             connector.pop_back();

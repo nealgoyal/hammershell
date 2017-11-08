@@ -27,8 +27,12 @@ SEMICOLON::SEMICOLON() {
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 SEMICOLON::SEMICOLON(Base* left, Base* right) {
-    Connector(left, right);
-    data = ";";
+      data = ";";
+      if(left != NULL) {
+          lhs = left;
+      } if(right != NULL) {
+          rhs = right;
+      }
 }
 
 void SEMICOLON::setSEMIVector(std::string str1) {

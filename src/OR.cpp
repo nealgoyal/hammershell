@@ -27,7 +27,11 @@ OR::OR() {
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 OR::OR(Base* left, Base* right) {
-    Connector(left, right);
+  if(left != NULL) {
+      lhs = left;
+  } if(right != NULL) {
+      rhs = right;
+  }
     data = "||";
 }
 
