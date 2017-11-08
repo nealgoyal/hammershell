@@ -64,6 +64,7 @@ std::vector<char*> Command::getComVectorReversed() {
 
 // Executes commands
 bool Command::execute() {
+    // cout << "EXEC" << endl;
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
 
