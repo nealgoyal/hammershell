@@ -12,6 +12,8 @@
 using namespace std;
 using namespace boost;
 
+// Traverse and print the tree in inorder notation
+// void displayTree() const;
 
 int main() {
     while(true) { // Prompts user again until they type exit.
@@ -58,8 +60,9 @@ int main() {
         // Always initialize root to the first command
         Command* left = new Command(command);
         Base* root = left;
-        std::cout << "First command: " << left->getData() << endl;
+        std::cout << "Command 1: " << left->getData() << endl;
         command.pop_back();
+        Connector* leftSide = NULL;
 
         // Comparisons for strings
         std::string conType = "";
@@ -69,62 +72,61 @@ int main() {
 
         cout << "Initial root: " << root << endl;
 
-        // Populate the tree
-        for(unsigned i = 0; i < connector.size(); ++i) {
+        // Sets first connector when command is the lhs
+        if(connector.size() != 0) {
             Command* right = new Command(command);
-            std::cout << "Second command: " << right->getData() << endl;
+            std::cout << "Command 2: " << right->getData() << endl;
             command.pop_back();
-            // Base* root = NULL; // = left;
-
+            
+            // Points at last c_string in connector
             conType = connector.back();
             connector.pop_back();
             cout << "conType: " << conType << endl;
+
+            // Checks which connector is passed in.
+            // Sets lhs to command and rhs to command(if it exists).
             if(conType == semiStr) {
                 SEMICOLON* semiCon = new SEMICOLON(left, right);
+                leftSide = semiCon;
                 root = semiCon;
             } else if(conType == andStr) {
                 AND* andCon = new AND(left, right);
+                leftSide = andCon;
                 root = andCon;
             } else if(conType == orStr) {
                 OR* orCon = new OR(left, right);
+                leftSide = orCon;
                 root = orCon;
             }
         }
 
-        // AND* a = new AND();
-        // a->setANDVector(str1);
-        // cout << "\nAND:" << endl;
-        // a->display();
-    
-        // OR* o = new OR();
-        // o->setORVector(str1);
-        // cout << "\nOR:" << endl;
-        // o->display();
-    
-        // SEMICOLON* sc = new SEMICOLON();
-        // sc->setSEMIVector(str1);
-        // cout << "\nSEMICOLON:" << endl;
-        // sc->display();
+        // Populate tree with multiple connectors
+        for(unsigned i = 0; i < connector.size(); ++i) {
+            Command* rightSide = new Command(command);
+            std::cout << "Command " << (i + 3) << ": " << rightSide->getData() << endl;
+            command.pop_back();
+            
+            // Points at last c_string in connector vector
+            conType = connector.back();
+            connector.pop_back();
+            cout << "conType: " << conType << endl;
 
-        // std::cout << "Temp value: " << temp->getData() << std::endl;
-        // Base* root = temp;
-        // std::cout << "Root: " << *root << std::endl;
-        // Populates a tree that stores both vectors and commands
-        // if(connector.size() == 0) {
-        //     root = cmd;
-        // }
-        // for(unsigned i = 0; i < connector.size(); ++i) {
-        
-    
-        // }
-    
-        //Populate a tree using cntr and cmd vectors.
-        // cout << "\nCreate a tree: " << endl;
-        // cout << "Connector back: " << connector.back();
-        // root = cntr;
-        // cout << root.back(); << endl;
-        // cout << root << " ";
-        // cout << *root;
+            // Checks which connector is passed in.
+            // Sets lhs to connector and rhs to command(if it exists).
+            if(conType == semiStr) {
+                SEMICOLON* semiCon = new SEMICOLON(leftSide, rightSide);
+                leftSide = semiCon;
+                root = semiCon;
+            } else if(conType == andStr) {
+                AND* andCon = new AND(leftSide, rightSide);
+                leftSide = andCon;
+                root = andCon;
+            } else if(conType == orStr) {
+                OR* orCon = new OR(leftSide, rightSide);
+                leftSide = orCon;
+                root = orCon;
+            }
+        }
     }
     return 0;
 }
