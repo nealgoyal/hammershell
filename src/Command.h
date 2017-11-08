@@ -10,16 +10,19 @@ using namespace std;
 
 class Command : public Base {
  protected:
+    char* cmdPtr;
+    string data;
     std::vector<std::string> commands;
     std::vector<const char*> cmds;
     std::vector<char*> cmdVec;
-    std::vector<char*> exCmd;
+    std::vector<char*> revCmd;
     std::string input;
  public:
-    Command() {}
-    Command(std::string);
+    Command();
+    Command(vector<char*>);
+    string getData();    
     void setComVector(std::string);
-    std::vector<char*> getComVector();
+    std::vector<char*> getComVectorReversed();
     virtual bool execute(std::vector<char*>);
     void display();
 };

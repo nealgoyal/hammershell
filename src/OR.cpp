@@ -22,11 +22,13 @@ using namespace boost;
 // Default Constructor
 OR::OR() {
     Connector();
+    data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 OR::OR(Base* left, Base* right) {
     Connector(left, right);
+    data = "||";
 }
 
 void OR::setORVector(std::string str1) {

@@ -12,98 +12,121 @@
 using namespace std;
 using namespace boost;
 
-void createTree(vector<string> &);
+// Traverse and print the tree in inorder notation
+// void displayTree() const;
 
 int main() {
-
-    std::string oldstr = "";
-    std::cout << "$ ";
-    std::getline(std::cin,oldstr);
-
-    std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
-
-    std::vector<char*> check;
-    //Base* root = NULL;
-    //Base* left = NULL;
-    //Base* right = NULL;
-
-    if(str1 == "exit") {
-        Exit *bye = new Exit();
-        bye->execute(check);
-    }
-
-    Command* cmd = new Command(str1);
-    cmd->setComVector(str1);
-    cout << "\nCommands:" << endl;
-    cmd->display();
-
-    Connector* cntr = new Connector();
-    cntr->setConVector(str1);
-    cout << "\nConnectors:" << endl;
-    cntr->display();
-
-    //Turn these pointers into vectors
-    std::vector<char*> connector = cntr->getConVector();
-    std::vector<char*> command = cmd->getComVector();
-
-    //cout << "\nConnector Vector: " << endl;
-    //for(unsigned i = 0; i < connector.size(); ++i) {
-    //    std::cout << connector.at(i) << ", ";
-    //}
-    //std::cout << std::endl;
+    while(true) { // Prompts user again until they type exit.
+        std::string oldstr = "";
+        std::cout << "$ ";
+        std::getline(std::cin, oldstr);
     
-    //Convert into type Base*
-    // std::vector<Base*> conTree;
-    // std::vector<char*>::iterator it;
-    // for(it == connector.begin(); it != connector.end(); ++it) {
-    //     conTree.push_back(dynamic_cast<Base*>(*it));
-    // }
+        std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
+    
+        std::vector<char*> check;
+    
+        if(str1 == "exit") {
+            Exit *bye = new Exit();
+            bye->execute(check);
+        }
+    
+        Command* cmd = new Command();
+        cmd->setComVector(str1);
+        cout << "\nCommands:" << endl;
+        cmd->display();
+    
+        Connector* cntr = new Connector();
+        cntr->setConVector(str1);
+        cout << "\nConnectors:" << endl;
+        cntr->display();
+    
+        //Turn these pointers into vectors
+        std::vector<char*> connector = cntr->getConVectorReversed();
+        std::vector<char*> command = cmd->getComVectorReversed();
+    
+        cout << "\nCommand Vector Reversed before pop: " << endl;
+        for(unsigned i = 0; i < command.size(); ++i) {
+           std::cout << command.at(i) << " ";
+        }
+        std::cout << std::endl;
 
-    // Populates a basic tree
-    // if(connector.size() == 1) {
-    //     // Grab the last two commands
-    //     right = command.back();
-    //     command.pop_back();
-    //     left = command.back();
-    //     command.pop_back();
+        cout << "\nConnector Vector Reversed: " << endl;
+        for(unsigned i = 0; i < connector.size(); ++i) {
+           std::cout << connector.at(i) << " ";
+        }
+        std::cout << std::endl;
+        
+        // std::cout << "First command: " << command.at(0) << std::endl;
+        // Always initialize root to the first command
+        Command* left = new Command(command);
+        Base* root = left;
+        std::cout << "Command 1: " << left->getData() << endl;
+        command.pop_back();
+        Connector* leftSide = NULL;
 
-    //     char* conType = connector.back();
-    //     connector.pop_back();
+        // Comparisons for strings
+        std::string conType = "";
+        std::string andStr = "&&";
+        std::string orStr = "||";
+        std::string semiStr = ";";
 
-    //     if(conType == ";") {
-    //         SEMICOLON* newCon = new SEMICOLON(lhs, rhs);
-    //         root = newCon;
-    //     } else if(conType == "&&") {
-    //         AND* newCon = new AND(lhs, rhs);
-    //         root = newCon;
-    //     } else if(conType == "||") {
-    //         OR* newCon = new OR(lhs, rhs);
-    //         root = newCon;
-    //     }
-    // }
+        cout << "Initial root: " << root << endl;
 
-    //Populate a tree using cntr and cmd vectors.
-    // cout << "\nCreate a tree: " << endl;
-    // cout << "Connector back: " << connector.back();
-    // root = cntr;
-    // cout << root.back(); << endl;
-    // cout << root << " ";
-    // cout << *root;
+        // Sets first connector when command is the lhs
+        if(connector.size() != 0) {
+            Command* right = new Command(command);
+            std::cout << "Command 2: " << right->getData() << endl;
+            command.pop_back();
+            
+            // Points at last c_string in connector
+            conType = connector.back();
+            connector.pop_back();
+            cout << "conType: " << conType << endl;
 
-    AND* a = new AND();
-    a->setANDVector(str1);
-    cout << "\nAND:" << endl;
-    a->display();
+            // Checks which connector is passed in.
+            // Sets lhs to command and rhs to command(if it exists).
+            if(conType == semiStr) {
+                SEMICOLON* semiCon = new SEMICOLON(left, right);
+                leftSide = semiCon;
+                root = semiCon;
+            } else if(conType == andStr) {
+                AND* andCon = new AND(left, right);
+                leftSide = andCon;
+                root = andCon;
+            } else if(conType == orStr) {
+                OR* orCon = new OR(left, right);
+                leftSide = orCon;
+                root = orCon;
+            }
+        }
 
-    OR* o = new OR();
-    o->setORVector(str1);
-    cout << "\nOR:" << endl;
-    o->display();
+        // Populate tree with multiple connectors
+        for(unsigned i = 0; i < connector.size(); ++i) {
+            Command* rightSide = new Command(command);
+            std::cout << "Command " << (i + 3) << ": " << rightSide->getData() << endl;
+            command.pop_back();
+            
+            // Points at last c_string in connector vector
+            conType = connector.back();
+            connector.pop_back();
+            cout << "conType: " << conType << endl;
 
-    SEMICOLON* sc = new SEMICOLON();
-    sc->setSEMIVector(str1);
-    cout << "\nSEMICOLON:" << endl;
-    sc->display();
-
+            // Checks which connector is passed in.
+            // Sets lhs to connector and rhs to command(if it exists).
+            if(conType == semiStr) {
+                SEMICOLON* semiCon = new SEMICOLON(leftSide, rightSide);
+                leftSide = semiCon;
+                root = semiCon;
+            } else if(conType == andStr) {
+                AND* andCon = new AND(leftSide, rightSide);
+                leftSide = andCon;
+                root = andCon;
+            } else if(conType == orStr) {
+                OR* orCon = new OR(leftSide, rightSide);
+                leftSide = orCon;
+                root = orCon;
+            }
+        }
+    }
     return 0;
 }
