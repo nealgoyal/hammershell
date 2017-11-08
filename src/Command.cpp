@@ -39,17 +39,13 @@ void Command::setComVector(std::string str1) {
     replace(str1.begin(), str1.end(), '|', '!');
     replace(str1.begin(), str1.end(), ';', '!');
 
-    // cout << str1 << endl;
-
     typedef vector< string > split_vector_type;
 
     split_vector_type coms;
     split( coms, str1, is_any_of("!"), token_compress_on );
-    // commands.size() = coms.size();
     for(unsigned i = 0; i < coms.size(); ++i) {
         trim(coms.at(i));
         commands.push_back(coms.at(i));
-        // strcpy(commands.at(i), coms.at(i).c_str());
     }
 
     cmdVec.reserve(commands.size());
@@ -57,8 +53,6 @@ void Command::setComVector(std::string str1) {
     for(unsigned index = 0; index < commands.size(); ++index) {
         cmds.push_back((char*)commands[index].c_str());
         cmdVec.push_back((char*)commands[index].c_str());
-        // cmds[index] = (char*)commands[index].c_str();
-        // cout << cmds[index] << endl;
     }
 }
 
@@ -68,6 +62,7 @@ std::vector<char*> Command::getComVectorReversed() {
     return revCmd;
 }
 
+// Executes commands
 bool Command::execute() {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
