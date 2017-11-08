@@ -39,17 +39,13 @@ void Command::setComVector(std::string str1) {
     replace(str1.begin(), str1.end(), '|', '!');
     replace(str1.begin(), str1.end(), ';', '!');
 
-    // cout << str1 << endl;
-
     typedef vector< string > split_vector_type;
 
     split_vector_type coms;
     split( coms, str1, is_any_of("!"), token_compress_on );
-    // commands.size() = coms.size();
     for(unsigned i = 0; i < coms.size(); ++i) {
         trim(coms.at(i));
         commands.push_back(coms.at(i));
-        // strcpy(commands.at(i), coms.at(i).c_str());
     }
 
     cmdVec.reserve(commands.size());
@@ -57,8 +53,6 @@ void Command::setComVector(std::string str1) {
     for(unsigned index = 0; index < commands.size(); ++index) {
         cmds.push_back((char*)commands[index].c_str());
         cmdVec.push_back((char*)commands[index].c_str());
-        // cmds[index] = (char*)commands[index].c_str();
-        // cout << cmds[index] << endl;
     }
 }
 
@@ -68,19 +62,42 @@ std::vector<char*> Command::getComVectorReversed() {
     return revCmd;
 }
 
+// Executes commands
 bool Command::execute() {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-        // char* ex[100];
-        // for(unsigned i = 0; cmdPtr[i] != ' '; ++i) {
-        //     ex[i] = cmdPtr[i];
-        // }
-        // std::cout << "Executable: " << ex << ", arguments: " << cmdPtr << std::endl;
-        
-        // if(execvp(ex[0], ex) == -1) {
-        //     perror("Failed to Execute");
-        //     return false;
-        // }
+
+        // Convert the data to a char[]
+        char ex[420]; // Blaze it
+        int args = 1;
+        // Populates ex[] with contents of data; counts amount of arguments
+        for(unsigned i = 0; i < data.size(); i++) {
+            ex[i] = data[i];
+            if(data[i] == ' ') { // Tracks number of spaces
+                ++args;
+            }
+        }
+        ex[data.size()] = '\0'; // Set last value in ex[] to null
+
+        // Need to create char** for execvp()
+        // Note: Justin hasn't studied the boost library :(
+        char* argument;
+        argument = strtok(ex, " ");
+        char** execArg = new char*[args + 1];
+        for(unsigned j = 0; argument != NULL; ++j) {
+            execArg[j] = new char[strlen(argument)];
+            strcpy(execArg[j], argument);
+            argument = strtok(NULL, " ");
+        }
+        execArg[args] = NULL; //Sets last value in execArg[] to null
+
+        // Call execvp
+        if(execvp(execArg[0], execArg) == -1) {
+            perror("Failed to Execute");
+            exit(0);
+            return false;
+        }
+        return true;
     } else if(pid > 0) { // Parent Process
         // cout << "ENTERED PID" << endl;
         int status;
