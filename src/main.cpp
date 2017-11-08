@@ -101,9 +101,9 @@ int main() {
         }
 
         // Populate tree with multiple connectors
-        for(unsigned i = 0; i < connector.size(); ++i) {
+        while(!connector.empty()) {
             Command* rightSide = new Command(command);
-            std::cout << "Command " << (i + 3) << ": " << rightSide->getData() << endl;
+            // std::cout << "Next Command " << ": " << rightSide->getData() << endl;
             command.pop_back();
             
             // Points at last c_string in connector vector
