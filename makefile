@@ -1,18 +1,31 @@
-$(shell mkdir -p bin)
-CC = g++
-CC_FLAGS = -Wall -Werror --ansi -pedantic -std=c++11
-
+COMPILE = g++
+FLAGS = -Wall -Werror --ansi -pedantic -std=c++11
 EXEC = bin/rshell
-SOURCEDIR = src/
-SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
+SOURCES = $(wildcard src/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
-all: $(EXEC)
-  $(EXEC): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC)
+$(shell mkdir -p bin)
+
+$(EXEC): $(OBJECTS)
+	$(COMPILE) $(OBJECTS) -o $(EXEC)
 
 %.o: %.cpp
-	$(CC) -c $(CC_FLAGS) $< -o $@
+	$(COMPILE) -c $(FLAGS) $< -o $@
 
 clean:
 	rm -f $(EXEC) $(OBJECTS)
+	#
+	# CC = g++
+	# CC_FLAGS = -Wall -ansi
+	# EXEC = test.out
+	# SOURCES = $(wildcard *.cpp)
+	# OBJECTS = $(SOURCES:.cpp=.o)
+	#
+	# $(EXEC): $(OBJECTS)
+	# 	$(CC) $(OBJECTS) -o $(EXEC)
+	#
+	# %.o: %.cpp
+	# 	$(CC) -c $(CC_FLAGS) $< -o $@
+	#
+	# clean:
+	# 	rm -f $(EXEC) $(OBJECTS)
