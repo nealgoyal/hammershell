@@ -30,36 +30,23 @@ int main() {
     
         Command* cmd = new Command();
         cmd->setComVector(str1);
-        cout << "\nCommands:" << endl;
-        cmd->display();
+        // cout << "\nCommands:" << endl;
+        // cmd->display();
     
         Connector* cntr = new Connector();
         cntr->setConVector(str1);
-        cout << "\nConnectors:" << endl;
-        cntr->display();
+        // cout << "\nConnectors:" << endl;
+        // cntr->display();
     
         //Turn these pointers into vectors
         std::vector<char*> connector = cntr->getConVectorReversed();
         std::vector<char*> command = cmd->getComVectorReversed();
     
-        // For testing
-        // cout << "\nCommand Vector Reversed before pop: " << endl;
-        // for(unsigned i = 0; i < command.size(); ++i) {
-        //    std::cout << command.at(i) << " ";
-        // }
-        // std::cout << std::endl;
-
-        // cout << "\nConnector Vector Reversed: " << endl;
-        // for(unsigned i = 0; i < connector.size(); ++i) {
-        //    std::cout << connector.at(i) << " ";
-        // }
-        // std::cout << std::endl;
-        
         // std::cout << "First command: " << command.at(0) << std::endl;
         // Always initialize root to the first command
         Command* left = new Command(command);
         Base* root = left;
-        std::cout << "Command 1: " << left->getData() << endl;
+        // std::cout << "Command 1: " << left->getData() << endl;
         command.pop_back();
         Connector* leftSide = NULL;
 
@@ -69,7 +56,7 @@ int main() {
         std::string orStr = "||";
         std::string semiStr = ";";
 
-        cout << "Initial root: " << root << endl;
+        // cout << "Initial root: " << root << endl;
 
         // Sets first connector when command is the lhs
         if(connector.size() != 0) {
@@ -80,7 +67,7 @@ int main() {
             // Points at last c_string in connector
             conType = connector.back();
             connector.pop_back();
-            cout << "conType: " << conType << endl;
+            // cout << "conType: " << conType << endl;
 
             // Checks which connector is passed in.
             // Sets lhs to command and rhs to command(if it exists).
@@ -126,6 +113,7 @@ int main() {
                 root = orCon;
             }
         }
+        root->execute();
     }
     return 0;
 }
