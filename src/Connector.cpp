@@ -23,8 +23,11 @@ Connector::Connector() {
 
 // Constructor: Sets the left and right-hand sides of the connector.
 Connector::Connector(Base* left, Base* right) {
-    lhs = left;
-    rhs = right;
+    if(left != NULL) {
+        lhs = left;
+    } else if(right != NULL) {
+        rhs = right;
+    }
 }
 
 // Takes in a string and puts it into the vector of connectors.
@@ -69,22 +72,6 @@ std::vector<char*> Connector::getConVectorReversed() {
 }
 
 bool Connector::execute(std::vector<char*> cnt) {
-    // pid_t pid = fork(); // Creates child process through fork
-    // if(pid == 0) { // Child Process
-    //     if(execvp(cnt[0], cnt.data()) == -1) {
-    //         perror("Failed to Execute");
-    //         exit(1);
-    //     }
-    // } else if(pid > 0) { // Parent Process
-    //     int status;
-    //     waitpid(pid, &status, 0);
-    //     if(WEXITSTATUS(status) == 1) {
-    //         return false;
-    //     }
-    // } else {
-    //     perror("Fork Failed"); // Failed
-    //     exit(1);
-    // }
     return true;
 }
 
@@ -94,3 +81,13 @@ void Connector::display() {
         std::cout << cntr.at(i) << std::endl;
     }
 }
+
+// Traverse and print the tree in inorder notation.
+// void Connector::inOrder(Connector* curr) const {
+//     if (curr == NULL) {
+//         return;
+//     }
+//     inOrder(curr->lhs);
+//     std::cout << curr->getData() << ", ";
+//     inOrder(curr->rhs);
+// }

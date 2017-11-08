@@ -22,11 +22,13 @@ using namespace boost;
 // Default Constructor
 AND::AND() {
     Connector();
+    data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 AND::AND(Base* left, Base* right) {
     Connector(left, right);
+    data = "&&";
 }
 
 void AND::setANDVector(std::string str1) {

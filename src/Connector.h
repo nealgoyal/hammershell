@@ -9,6 +9,7 @@ class Connector : public Base {
 public:
     Base* lhs;
     Base* rhs;
+    std::string data;
     std::vector<std::string> connectors;
     std::vector<std::string> tempContainer;
     std::vector<char*> cntr;
@@ -20,6 +21,7 @@ public:
     std::vector<char*> getConVectorReversed();
     virtual bool execute(std::vector<char*>);
     void display();
+    // void inOrder(Connector*) const;
 };
 
 #endif

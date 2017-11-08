@@ -22,11 +22,13 @@ using namespace boost;
 // Default Constructor
 SEMICOLON::SEMICOLON() {
     Connector();
+    data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 SEMICOLON::SEMICOLON(Base* left, Base* right) {
     Connector(left, right);
+    data = ";";
 }
 
 void SEMICOLON::setSEMIVector(std::string str1) {
