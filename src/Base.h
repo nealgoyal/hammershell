@@ -5,6 +5,6 @@
 class Base {
  public:
     Base() {}
-    virtual bool execute(std::vector<char*>) = 0;
+    virtual bool execute() = 0;
 };
 #endif

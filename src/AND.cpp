@@ -63,9 +63,9 @@ void AND::setANDVector(std::string str1) {
 
 // Executes right side if left side DOES execute.
 // Returns true if right side executes.
-bool AND::execute(std::vector<char*> cmd) {
-    if(lhs->execute(cmd)) {
-        if(rhs->execute(cmd)) {
+bool AND::execute() {
+    if(lhs->execute()) {
+        if(rhs->execute()) {
             return true;
         }
         return false;

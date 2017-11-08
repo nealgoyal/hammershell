@@ -62,9 +62,9 @@ void SEMICOLON::setSEMIVector(std::string str1) {
 }
 
 // Executes left and then executes right. Returns true if right executes.
-bool SEMICOLON::execute(std::vector<char*> cmd) {
-    lhs->execute(cmd);
-    if(rhs->execute(cmd)) {
+bool SEMICOLON::execute() {
+    lhs->execute();
+    if(rhs->execute()) {
         return true;
     }
     return false;

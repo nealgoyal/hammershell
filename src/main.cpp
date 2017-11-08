@@ -23,11 +23,9 @@ int main() {
     
         std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
     
-        std::vector<char*> check;
-    
         if(str1 == "exit") {
             Exit *bye = new Exit();
-            bye->execute(check);
+            bye->execute();
         }
     
         Command* cmd = new Command();
@@ -44,17 +42,18 @@ int main() {
         std::vector<char*> connector = cntr->getConVectorReversed();
         std::vector<char*> command = cmd->getComVectorReversed();
     
-        cout << "\nCommand Vector Reversed before pop: " << endl;
-        for(unsigned i = 0; i < command.size(); ++i) {
-           std::cout << command.at(i) << " ";
-        }
-        std::cout << std::endl;
+        // For testing
+        // cout << "\nCommand Vector Reversed before pop: " << endl;
+        // for(unsigned i = 0; i < command.size(); ++i) {
+        //    std::cout << command.at(i) << " ";
+        // }
+        // std::cout << std::endl;
 
-        cout << "\nConnector Vector Reversed: " << endl;
-        for(unsigned i = 0; i < connector.size(); ++i) {
-           std::cout << connector.at(i) << " ";
-        }
-        std::cout << std::endl;
+        // cout << "\nConnector Vector Reversed: " << endl;
+        // for(unsigned i = 0; i < connector.size(); ++i) {
+        //    std::cout << connector.at(i) << " ";
+        // }
+        // std::cout << std::endl;
         
         // std::cout << "First command: " << command.at(0) << std::endl;
         // Always initialize root to the first command

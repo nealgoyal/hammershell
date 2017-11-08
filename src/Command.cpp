@@ -27,13 +27,6 @@ Command::Command(vector<char*> input) {
     }
 }
 
-// Destructor: deletes the command pointer
-// Command::~Command() {
-//     if(cmdPtr != NULL) {
-//         delete cmdPtr;
-//     }
-// }
-
 // Returns the data when pointed to in the main
 string Command::getData() {
     return data;
@@ -67,19 +60,6 @@ void Command::setComVector(std::string str1) {
         // cmds[index] = (char*)commands[index].c_str();
         // cout << cmds[index] << endl;
     }
-    //
-    // if(!execute(cmds)) {
-    //   cout << "NO";
-    // }
-    // else {
-    //   cout << "YES";
-    // }
-
-    // Populates vector of char* for execute
-    // for(int i = 0; i < commands.size(); ++i) {
-    //     exCmd[i] = &commands[i][0];
-    // }
-    // execute(exCmd); -> Seg fault
 }
 
 std::vector<char*> Command::getComVectorReversed() {
@@ -88,10 +68,19 @@ std::vector<char*> Command::getComVectorReversed() {
     return revCmd;
 }
 
-bool Command::execute(std::vector<char*> cmdVec) {
+bool Command::execute() {
     pid_t pid = fork(); // Creates child process through fork
     if(pid == 0) { // Child Process
-        if(execvp(cmdVec[0], cmdVec.data()) == -1) {
+        char* ex[420];
+        // for(unsigned i = 0; cmdPtr[i] != ' '; ++i) {
+        //     ex[i] = cmdPtr[i];
+        // }
+        // std::string space = " ";
+        // for(int i = 0; data[i] != space; ++i) {
+        //     ex[i] = data[i];
+        // }
+        std::cout << "Executable: " << ex << ", arguments: " << cmdPtr << std::endl;
+        if(execvp(ex[0], ex) == -1) {
             perror("Failed to Execute");
             return false;
         }
@@ -117,7 +106,4 @@ void Command::display() {
   for(unsigned i = 0; i < cmds.size(); ++i) {
       std::cout << cmds.at(i) << std::endl;
   }
-    //std::cout << commands.at(0) << std::endl;
-    //std::cout << commands.at(1) << std::endl;
-    //std::cout << commands.at(2) << std::endl;
 }

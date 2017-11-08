@@ -19,7 +19,7 @@ public:
     Connector(Base*, Base*);
     void setConVector(std::string);
     std::vector<char*> getConVectorReversed();
-    virtual bool execute(std::vector<char*>);
+    virtual bool execute();
     void display();
     // void inOrder(Connector*) const;
 };

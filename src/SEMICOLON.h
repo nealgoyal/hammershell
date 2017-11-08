@@ -12,7 +12,7 @@ private:
     SEMICOLON();
     SEMICOLON(Base*, Base*);
     void setSEMIVector(std::string);
-    bool execute(std::vector<char*> cmd);
+    bool execute();
     void display();
 };
 

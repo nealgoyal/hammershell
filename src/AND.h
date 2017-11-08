@@ -12,7 +12,7 @@ class AND : public Connector {
     AND();
     AND(Base*, Base*);
     void setANDVector(std::string);
-    bool execute(std::vector<char*> cmd);
+    bool execute();
     void display();
 };
 

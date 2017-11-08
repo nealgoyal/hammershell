@@ -71,23 +71,9 @@ std::vector<char*> Connector::getConVectorReversed() {
     return revCntr;
 }
 
-bool Connector::execute(std::vector<char*> cnt) {
-    return true;
-}
-
 // Displays all of the contents of the vector of connectors."
 void Connector::display() {
     for(unsigned i = 0; i < cntr.size(); ++i) {
         std::cout << cntr.at(i) << std::endl;
     }
 }
-
-// Traverse and print the tree in inorder notation.
-// void Connector::inOrder(Connector* curr) const {
-//     if (curr == NULL) {
-//         return;
-//     }
-//     inOrder(curr->lhs);
-//     std::cout << curr->getData() << ", ";
-//     inOrder(curr->rhs);
-// }
