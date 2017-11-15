@@ -7,6 +7,7 @@
 #include "AND.h"
 #include "OR.h"
 #include "SEMICOLON.h"
+#include "Test.h"
 
 #include <boost/algorithm/string.hpp>
 using namespace std;
@@ -115,5 +116,6 @@ int main() {
         }
         root->execute();
     }
+
     return 0;
 }
