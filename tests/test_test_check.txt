@@ -1,0 +1,10 @@
+echo Testing test commands
+
+[ -e Command.h ] && echo Command.h exists
+test -e Command.h && echo Command.h exists
+[ -e Command.h ] && echo "Command.h exists"
+touch tester.cpp
+test -f tester.cpp && echo tester.cpp exists
+mkdir newDir
+test -d newDir && echo newDir exists
+exit
