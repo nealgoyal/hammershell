@@ -22,8 +22,31 @@ int main() {
         std::cout << "$ ";
         std::getline(std::cin, oldstr);
 
-        std::string str1 = oldstr.substr(0, oldstr.find("#", 0));
+        std::string str = oldstr.substr(0, oldstr.find("#", 0));
 
+        //----------------------------------------------
+        //parsing for any [] -> test
+        vector<char> tester(str.begin(), str.end());
+        for(int i = 0; i < tester.size(); ++i) {
+            if(tester.at(i) == '[') {
+                tester.erase(tester.begin() + i);
+                for(int j = i + 1; j < tester.size(); ++j) {
+                    if(tester.at(j) == ']') {
+                        tester.erase(tester.begin() + j);
+                    }
+
+                }
+            }
+        }
+
+        string str1 = string(tester.begin(), tester.end());
+        for(int i = 0; i < str1.length(); ++i) {
+            if(str1[i] == '-') {
+                str1.insert(i, "test ");
+                break;
+            }
+        }
+        //--------------------------------------------------------
         if(str1 == "exit") {
             Exit *bye = new Exit();
             bye->execute();
