@@ -11,9 +11,6 @@
 #include <boost/algorithm/string.hpp>
 using namespace std;
 using namespace boost;
-//  protected:
-//     vector<char*> commands;
-//  public:
 
 Command::Command() {
     cmdPtr = NULL;
@@ -34,10 +31,11 @@ string Command::getData() {
 
 // Takes in a char* and puts it into the vector of commands.
 void Command::setComVector(std::string str1) {
-
+   
     replace(str1.begin(), str1.end(), '&', '!');
     replace(str1.begin(), str1.end(), '|', '!');
     replace(str1.begin(), str1.end(), ';', '!');
+    // replace(str1.begin(), str1.end(), '"', ' ');
 
     typedef vector< string > split_vector_type;
 

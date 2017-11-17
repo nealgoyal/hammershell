@@ -20,7 +20,7 @@ Test::Test() {
     flgPtr = NULL;
 }
 
-// Constructor: takes a vector of char* and loads the commands vector.
+// Constructor: takes a vector of char* and loads the tests vector.
 Test::Test(vector<char*> input) {
     if(input.size() != 0) {
         flgPtr = input.back();
