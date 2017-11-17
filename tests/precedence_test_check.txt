@@ -1,0 +1,8 @@
+echo Testing Precedence commands
+
+(echo A && echo B) || echo C
+echo A && (echo B || echo C)
+((ls -a && echo A) || (echo C && echo B)) || mkdir newF
+(ls) || echo bye
+((echo hello) || echo bye) || echo world
+exit
