@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -12,9 +13,6 @@
 #include <boost/algorithm/string.hpp>
 using namespace std;
 using namespace boost;
-//  protected:
-//     vector<char*> commands;
-//  public:
 
 Test::Test() {
     flgPtr = NULL;
@@ -33,7 +31,7 @@ string Test::getData() {
     return data;
 }
 
-// Takes in a char* and puts it into the vector of commands.
+// Takes in a char* and puts it into the vector of tests.
 void Test::setTestVector(std::string str1) {
 
     typedef vector< string > split_vector_type;
@@ -46,8 +44,14 @@ void Test::setTestVector(std::string str1) {
     }
 
     for(unsigned i = 0; i < flags.size(); ++i ) {
-        if(flags.at(i) == "-e" || flags.at(i) == "-d" || flags.at(i) == "-f") {
-            tmpFlags.push_back(flags.at(i));
+        if(flags.at(i) == "-e") {
+            tmpFlags.push_back("e");
+        }
+        if(flags.at(i) == "-d") {
+            tmpFlags.push_back("d");
+        }
+        if(flags.at(i) == "-f") {
+            tmpFlags.push_back("f");
         }
     }
 
@@ -65,59 +69,28 @@ std::vector<char*> Test::getTestVectorReversed() {
     return revFlg;
 }
 
-// Executes commands
-// bool Command::execute() {
-//     // cout << "EXEC" << endl;
-//     pid_t pid = fork(); // Creates child process through fork
-//     if(pid == 0) { // Child Process
-//
-//         // Convert the data to a char[]
-//         char ex[420]; // Blaze it
-//         int args = 1;
-//         // Populates ex[] with contents of data; counts amount of arguments
-//         for(unsigned i = 0; i < data.size(); i++) {
-//             ex[i] = data[i];
-//             if(data[i] == ' ') { // Tracks number of spaces
-//                 ++args;
-//             }
-//         }
-//         ex[data.size()] = '\0'; // Set last value in ex[] to null
-//
-//         // Need to create char** for execvp()
-//         // Note: Justin hasn't studied the boost library :(
-//         char* argument;
-//         argument = strtok(ex, " ");
-//         char** execArg = new char*[args + 1];
-//         for(unsigned j = 0; argument != NULL; ++j) {
-//             execArg[j] = new char[strlen(argument)];
-//             strcpy(execArg[j], argument);
-//             argument = strtok(NULL, " ");
-//         }
-//         execArg[args] = NULL; //Sets last value in execArg[] to null
-//
-//         // Call execvp
-//         if(execvp(execArg[0], execArg) == -1) {
-//             perror("Failed to Execute");
-//             exit(0);
-//             return false;
-//         }
-//         return true;
-//     } else if(pid > 0) { // Parent Process
-//         // cout << "ENTERED PID" << endl;
-//         int status;
-//         waitpid(pid, &status, 0);
-//         if(WEXITSTATUS(status) == 1) {
-//             // cout << "ENTERED STAT" << endl;
-//             return false;
-//         }
-//     } else {
-//         // cout << "ENTERED PERR" << endl;
-//         perror("Fork Failed"); // Failed
-//         exit(1);
-//     }
-//     // cout << "DONE" << endl;
-//     return true;
-// }
+// Executes Test
+bool Test::execute() {
+    struct stat sendHelp;
+    if(tmpFlags.front() != "-e" && tmpFlags.front() != "-d" && tmpFlags.front() != "-f") {
+        perror("Invalid flag");
+        return false;
+    }
+    //flgsVec.front() ?
+    if(stat(const_cast<char*>(flgsVec.front()), &sendHelp) == -1) {
+        cout << "(False)" << endl;
+        return false;
+    }
+    // if((tmpFlags.front() == "-e" && sendHelp.st_mode) ||
+    //    (tmpFlags.front() == "-d" && S_ISDIR(sendHelp.st_mode)) ||
+    //    (tmpFlags.front() == "-f" && S_ISREG(sendHelp.st_mode))) {
+    if(sendHelp.st_mode) {
+        cout << "(True)" << endl;
+        return true;
+    }
+    cout << "(False)" << endl;
+    return false;
+}
 
 // Displays all of the contents of the vector of commands.
 void Test::display() {

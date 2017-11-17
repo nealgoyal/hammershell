@@ -27,10 +27,10 @@ int main() {
         //----------------------------------------------
         //parsing for any [] -> test
         vector<char> tester(str.begin(), str.end());
-        for(int i = 0; i < tester.size(); ++i) {
+        for(unsigned i = 0; i < tester.size(); ++i) {
             if(tester.at(i) == '[') {
                 tester.erase(tester.begin() + i);
-                for(int j = i + 1; j < tester.size(); ++j) {
+                for(unsigned j = i + 1; j < tester.size(); ++j) {
                     if(tester.at(j) == ']') {
                         tester.erase(tester.begin() + j);
                     }
@@ -40,7 +40,7 @@ int main() {
         }
 
         string str1 = string(tester.begin(), tester.end());
-        for(int i = 0; i < str1.length(); ++i) {
+        for(unsigned i = 0; i < str1.length(); ++i) {
             if(str1[i] == '-') {
                 str1.insert(i, "test ");
                 break;

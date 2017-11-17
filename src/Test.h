@@ -9,7 +9,7 @@
 using namespace std;
 
 class Test : public Base {
- protected:
+protected:
     char* flgPtr;
     string data;
     std::vector<std::string> flags;
@@ -24,7 +24,7 @@ class Test : public Base {
     string getData();
     void setTestVector(std::string);
     std::vector<char*> getTestVectorReversed();
-    // virtual bool execute();
+    virtual bool execute();
     void display();
 };
 
