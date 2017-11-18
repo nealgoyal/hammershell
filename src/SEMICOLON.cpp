@@ -20,19 +20,15 @@ using namespace boost;
 //  public:
 
 // Default Constructor
-SEMICOLON::SEMICOLON() {
-    Connector();
+SEMICOLON::SEMICOLON() : Connector() {
     data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 SEMICOLON::SEMICOLON(Base* left, Base* right) {
-      data = ";";
-      if(left != NULL) {
-          lhs = left;
-      } if(right != NULL) {
-          rhs = right;
-      }
+    lhs = left;
+    rhs = right;
+    data = ";";
 }
 
 void SEMICOLON::setSEMIVector(std::string str1) {

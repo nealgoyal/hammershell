@@ -132,8 +132,7 @@ bool Command::execute() {
 
             // Call execvp
             if(execvp(execArg[0], execArg) == -1) {
-                perror("Failed to Execute");
-                exit(0);
+                perror("Command not found");
                 return false;
             }
             return true;

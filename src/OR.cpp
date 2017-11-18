@@ -20,59 +20,51 @@ using namespace boost;
 //  public:
 
 // Default Constructor
-OR::OR() {
-    Connector();
+OR::OR() : Connector() {
     data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 OR::OR(Base* left, Base* right) {
-  if(left != NULL) {
-      lhs = left;
-  } if(right != NULL) {
-      rhs = right;
-  }
+    lhs = left;
+    rhs = right;
     data = "||";
 }
 
 void OR::setORVector(std::string str1) {
-
-  std::string str2 = " ";
-  for(unsigned i = 0; i < str1.length(); ++i) {
-      if(str1.at(i) == ';') {
+    std::string str2 = " ";
+    for(unsigned i = 0; i < str1.length(); ++i) {
+        if(str1.at(i) == ';') {
         str1.insert(i, str2);
         i++;
-      }
-  }
+        }
+    }
 
-  typedef vector< string > split_vector_type;
+    typedef vector< string > split_vector_type;
 
-  split_vector_type cnts;
-  split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(unsigned i = 0; i < cnts.size(); ++i) {
-      ors.push_back(cnts.at(i));
-  }
+    split_vector_type cnts;
+    split( cnts, str1, is_any_of(" "), token_compress_on );
+    for(unsigned i = 0; i < cnts.size(); ++i) {
+        ors.push_back(cnts.at(i));
+    }
 
-  for(unsigned i = 0; i < ors.size(); ++i ) {
+    for(unsigned i = 0; i < ors.size(); ++i ) {
     if(ors.at(i) == "||") {
         tempOV.push_back(ors.at(i));
     }
-  }
+    }
 
-  orV.reserve(tempOV.size());
-  for(unsigned index = 0; index < tempOV.size(); ++index) {
-      orV.push_back((char*)tempOV[index].c_str());
-  }
+    orV.reserve(tempOV.size());
+    for(unsigned index = 0; index < tempOV.size(); ++index) {
+        orV.push_back((char*)tempOV[index].c_str());
+    }
 }
 
 // Executes right side if left side does not execute.
 // Returns true if right side executes.
 bool OR::execute() {
     if(!lhs->execute()) {
-        if(rhs->execute()) {
-            return true;
-        }
-        return false;
+        return rhs->execute();
     }
     return true;
 }
