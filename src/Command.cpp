@@ -1,10 +1,12 @@
 #include "Command.h"
 
 #include <iostream>
+#include <string.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 
 #include <algorithm>
@@ -60,57 +62,97 @@ std::vector<char*> Command::getComVectorReversed() {
     return revCmd;
 }
 
+// Executes the test command
+bool Command::testCommand() {
+    struct stat sendHelp;
+    if((getData().substr(5,2) != "-e") && (getData().substr(5,2) != "-d")
+         && (getData().substr(5,2) != "-f")) {
+        if(getData().substr(5,1) != "-") {
+            std::string str = "-e ";
+            data.insert(5, str);
+            // cout << "Data after insert: " << getData() << endl;
+            // cout << "Flag: " << getData().substr(5,2) << endl;
+            // cout << "Argument after flag: " << getData().substr(8) << endl;
+        } else {
+            perror("Invalid flag");
+            return false;
+        }
+    }
+    // Inputs everything after flag
+    if(stat((getData().substr(8)).c_str(), &sendHelp) == -1) {
+        cout << "(False)" << endl;
+        return false;
+    }
+    // Executes test command based on flag
+    if((getData().substr(5,2) == "-e" && sendHelp.st_mode) ||
+      (getData().substr(5,2) == "-d" && S_ISDIR(sendHelp.st_mode)) ||
+      (getData().substr(5,2) == "-f" && S_ISREG(sendHelp.st_mode))) {
+        cout << "(True)" << endl;
+        return true;
+    }
+    cout << "(False)" << endl;
+    return false;
+}
+
 // Executes commands
 bool Command::execute() {
-    // cout << "EXEC" << endl;
-    pid_t pid = fork(); // Creates child process through fork
-    if(pid == 0) { // Child Process
-
-        // Convert the data to a char[]
-        char ex[420]; // Blaze it
-        int args = 1;
-        // Populates ex[] with contents of data; counts amount of arguments
-        for(unsigned i = 0; i < data.size(); i++) {
-            ex[i] = data[i];
-            if(data[i] == ' ') { // Tracks number of spaces
-                ++args;
-            }
-        }
-        ex[data.size()] = '\0'; // Set last value in ex[] to null
-
-        // Need to create char** for execvp()
-        // Note: Justin hasn't studied the boost library :(
-        char* argument;
-        argument = strtok(ex, " ");
-        char** execArg = new char*[args + 1];
-        for(unsigned j = 0; argument != NULL; ++j) {
-            execArg[j] = new char[strlen(argument)];
-            strcpy(execArg[j], argument);
-            argument = strtok(NULL, " ");
-        }
-        execArg[args] = NULL; //Sets last value in execArg[] to null
-
-        // Call execvp
-        if(execvp(execArg[0], execArg) == -1) {
-            perror("Failed to Execute");
-            exit(0);
-            return false;
-        }
-        return true;
-    } else if(pid > 0) { // Parent Process
-        // cout << "ENTERED PID" << endl;
-        int status;
-        waitpid(pid, &status, 0);
-        if(WEXITSTATUS(status) == 1) {
-            // cout << "ENTERED STAT" << endl;
-            return false;
-        }
+    if(getData().substr(0,4) == "test") {
+        // cout << "Data: " << getData() << endl;
+        // cout << "Flag: " << getData().substr(5,2) << endl;
+        // cout << "Argument after flag: " << getData().substr(8) << endl;
+        testCommand();
     } else {
-        // cout << "ENTERED PERR" << endl;
-        perror("Fork Failed"); // Failed
-        exit(1);
+        // cout << "EXEC" << endl;
+        pid_t pid = fork(); // Creates child process through fork
+        if(pid == 0) { // Child Process
+
+            // Convert the data to a char[]
+            char ex[420]; // Blaze it
+            int args = 1;
+            // Populates ex[] with contents of data; counts amount of arguments
+            for(unsigned i = 0; i < data.size(); i++) {
+                ex[i] = data[i];
+                if(data[i] == ' ') { // Tracks number of spaces
+                    ++args;
+                }
+            }
+            ex[data.size()] = '\0'; // Set last value in ex[] to null
+
+            // Need to create char** for execvp()
+            // Note: Justin hasn't studied the boost library :(
+            char* argument;
+            argument = strtok(ex, " ");
+            char** execArg = new char*[args + 1];
+            for(unsigned j = 0; argument != NULL; ++j) {
+                execArg[j] = new char[strlen(argument)];
+                strcpy(execArg[j], argument);
+                argument = strtok(NULL, " ");
+            }
+            execArg[args] = NULL; //Sets last value in execArg[] to null
+
+            // Call execvp
+            if(execvp(execArg[0], execArg) == -1) {
+                perror("Failed to Execute");
+                exit(0);
+                return false;
+            }
+            return true;
+        } else if(pid > 0) { // Parent Process
+            // cout << "ENTERED PID" << endl;
+            int status;
+            waitpid(pid, &status, 0);
+            if(WEXITSTATUS(status) == 1) {
+                // cout << "ENTERED STAT" << endl;
+                return false;
+            }
+        } else {
+            // cout << "ENTERED PERR" << endl;
+            perror("Fork Failed"); // Failed
+            exit(1);
+        }
+        // cout << "DONE" << endl;
+        return true;
     }
-    // cout << "DONE" << endl;
     return true;
 }
 

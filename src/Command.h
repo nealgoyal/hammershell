@@ -24,6 +24,7 @@ class Command : public Base {
     void setComVector(std::string);
     std::vector<char*> getComVectorReversed();
     virtual bool execute();
+    bool testCommand();
     void display();
 };
 
