@@ -7,7 +7,6 @@
 #include "AND.h"
 #include "OR.h"
 #include "SEMICOLON.h"
-#include "Test.h"
 
 #include <boost/algorithm/string.hpp>
 using namespace std;
@@ -36,13 +35,11 @@ int main() {
                     if(tester.at(j) == ']') {
                         tester.erase(tester.begin() + j);
                     }
-
                 }
             }
         }
-
+        // Inserts "test " before the flag if []
         string str1 = string(tester.begin(), tester.end());
-        cout << "str1(0-4): " << str1.substr(0,4) << endl;
         if(str1.substr(0,4) != "test") {
             for(unsigned i = 0; i < str1.length(); ++i) {
                 if(str1[i] == '-') {
