@@ -1,10 +1,19 @@
 echo Testing test commands
 
-[ -e Command.h ] && echo Command.h exists
-test -e Command.h && echo Command.h exists
-[ -e Command.h ] && echo "Command.h exists"
-touch tester.cpp
-test -f tester.cpp && echo tester.cpp exists
+echo Testing proper paths and flags
+[ -e src/Command.h ] && echo Command.h exists
+test -e src/Command.h && echo Command.h exists
 mkdir newDir
 test -d newDir && echo newDir exists
+
+echo Testing improper flags
+test -k makefile
+test -z README.md
+test -f bin
+test -d LICENSE.md
+
+echo Testing improper paths
+[ -e src/Com ]
+test -e src/ShouldFail
+
 exit

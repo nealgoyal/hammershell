@@ -1,8 +1,16 @@
 echo Testing Precedence commands
 
+echo Testing single set of parentheses:
 (echo A && echo B) || echo C
 echo A && (echo B || echo C)
+
+echo Testing multiple sets of parentheses:
 ((ls -a && echo A) || (echo C && echo B)) || mkdir newF
 (ls) || echo bye
-((echo hello) || echo bye) || echo world
+((ls -a && echo A) || (echo C && echo B)) || ((mkdir newF
+ls) || echo bye)
+
+echo Testing uneven amount of parentheses:
+((echo hello || echo bye) && echo world
+(echo hello || echo bye))
 exit
