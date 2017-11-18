@@ -1,5 +1,5 @@
 # RShell Program
-## Author: Justin Schopick and Neal Goyal
+## Authors: Justin Schopick and Neal Goyal
 
 ## Project Description
 This program will mimic a linux or unix terminal. The program will run by allowing the user to take in a command. The program will parse each command into different vectors based on commands and connectors. Then, we use system calls to give each command functionality.
@@ -18,12 +18,26 @@ Need to install the boost library to run the program. To get instructions on how
 ```c++
   $ g++ *.cpp -std=c++11
 ```
+## Features
+* "||" executes the next command if the previous command fails.
+* "&&" executes the next command if the previous command succeeds.
+* ";" always executes the next command.
+* "#" turns everything following it into a comment.
+
+*The test command can be executed using "test" or "[]". This will print (True) if the input exists and (False) if it does not exist. The following flags can be specified for the Test Command:*
+* No flag: treat as if -e flag.
+* -e flag: test if the input is a directory or regular file.
+* -d flag: test if the input is a directory.
+* -f flag: test if the input is a regular file.
+
 ## Scripts
 In this lab, we used scripts to thoroughly test all the commands.
 ```c++
   single_command.sh        #tests single commands
   multi_command.sh         #tests commands with ;, &&, or ||
   commented_command.sh     #tests commands with comments
+  test_test.sh             #tests the Test command
+  precedence_test.sh       #tests if precedence is accounted for ()
   exit.sh
 ```
 
@@ -41,3 +55,4 @@ $ bin/rshell
 - Issues with shell scripts running accordingly to each test.
 - Cannot account for quotations within the commands
 - Will run with a connector at the end of the program
+- Cannot account for precedence according to parentheses
