@@ -16,6 +16,8 @@ using namespace boost;
 // Traverse and print the tree in inorder notation
 // void displayTree() const;
 
+// Base* createTree(Base*, Base*, Connector*, std::string);
+
 int main() {
     while(true) { // Prompts user again until they type exit.
         std::string oldstr = "";
@@ -40,10 +42,13 @@ int main() {
         }
 
         string str1 = string(tester.begin(), tester.end());
-        for(unsigned i = 0; i < str1.length(); ++i) {
-            if(str1[i] == '-') {
-                str1.insert(i, "test ");
-                break;
+        cout << "str1(0-4): " << str1.substr(0,4) << endl;
+        if(str1.substr(0,4) != "test") {
+            for(unsigned i = 0; i < str1.length(); ++i) {
+                if(str1[i] == '-') {
+                    str1.insert(i, "test ");
+                    break;
+                }
             }
         }
         //--------------------------------------------------------
@@ -73,14 +78,11 @@ int main() {
         // std::cout << "Command 1: " << left->getData() << endl;
         command.pop_back();
         Connector* leftSide = NULL;
-
-        // Comparisons for strings
+    
         std::string conType = "";
         std::string andStr = "&&";
         std::string orStr = "||";
         std::string semiStr = ";";
-
-        // cout << "Initial root: " << root << endl;
 
         // Sets first connector when command is the lhs
         if(connector.size() != 0) {
@@ -95,6 +97,7 @@ int main() {
 
             // Checks which connector is passed in.
             // Sets lhs to command and rhs to command(if it exists).
+            // root = createTree(left, right, leftSide, conType);
             if(conType == semiStr) {
                 SEMICOLON* semiCon = new SEMICOLON(left, right);
                 leftSide = semiCon;
@@ -123,6 +126,7 @@ int main() {
 
             // Checks which connector is passed in.
             // Sets lhs to connector and rhs to command(if it exists).
+            // root = createTree(left, right, leftSide, conType);
             if(conType == semiStr) {
                 SEMICOLON* semiCon = new SEMICOLON(leftSide, rightSide);
                 leftSide = semiCon;
@@ -142,3 +146,26 @@ int main() {
 
     return 0;
 }
+
+// Base* createTree(Base* left, Base* right, Base* leftSide, std::string conType) {
+//     Base* root = NULL;
+//     // Comparisons for strings
+//     std::string andStr = "&&";
+//     std::string orStr = "||";
+//     std::string semiStr = ";";
+
+//     if(conType == semiStr) {
+//         SEMICOLON* semiCon = new SEMICOLON(left, right);
+//         leftSide = semiCon;
+//         root = semiCon;
+//     } else if(conType == andStr) {
+//         AND* andCon = new AND(left, right);
+//         leftSide = andCon;
+//         root = andCon;
+//     } else if(conType == orStr) {
+//         OR* orCon = new OR(left, right);
+//         leftSide = orCon;
+//         root = orCon;
+//     }
+//     return root;
+// }
