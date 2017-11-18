@@ -40,7 +40,7 @@ int main() {
         }
         // Inserts "test " before the flag if []
         string str1 = string(tester.begin(), tester.end());
-        if(str1.substr(0,4) != "test") {
+        if(str1.substr(0,1) == "[") {
             for(unsigned i = 0; i < str1.length(); ++i) {
                 if(str1[i] == '-') {
                     str1.insert(i, "test ");
