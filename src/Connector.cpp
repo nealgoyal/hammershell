@@ -23,11 +23,8 @@ Connector::Connector() {
 
 // Constructor: Sets the left and right-hand sides of the connector.
 Connector::Connector(Base* left, Base* right) {
-    if(left != NULL) {
-        lhs = left;
-    } if(right != NULL) {
-        rhs = right;
-    }
+    lhs = left;
+    rhs = right;
 }
 
 // Takes in a string and puts it into the vector of connectors.

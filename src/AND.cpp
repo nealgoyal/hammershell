@@ -20,18 +20,14 @@ using namespace boost;
 //  public:
 
 // Default Constructor
-AND::AND() {
-    Connector();
+AND::AND() : Connector() {
     data = "";
 }
 
 // Constructor: Sets the left and right-hand sides of the AND connector.
 AND::AND(Base* left, Base* right) {
-  if(left != NULL) {
-      lhs = left;
-  } if(right != NULL) {
-      rhs = right;
-  }
+    lhs = left;
+    rhs = right;
     data = "&&";
 }
 
