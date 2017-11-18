@@ -2,4 +2,7 @@ a.out
 *.o
 *.swp
 *.gch
+*.json
+.DS_Store
+.gitignore
 /bin
