@@ -25,6 +25,26 @@ int main() {
 
         std::string str = oldstr.substr(0, oldstr.find("#", 0));
 
+        int count = 0;
+        // checks if balanced parentheses. If not, throw error
+        for(unsigned i = 0; i < str.length(); ++i) {
+            if(str.at(i) == '(') {
+                ++count;
+            }
+            if(str.at(i) == ')') {
+                --count;
+                if(count < 0) {
+                    // perror("bash: syntax error near unexpected token ')'");
+                    cout << "bash: syntax error near unexpected token ')'" << endl;
+                    exit(1);
+                }
+            }
+        }
+        if(count > 0) {
+            cout << "bash: syntax error near unexpected token '('" << endl;
+            exit(1);
+        }
+
         //----------------------------------------------
         //parsing for any [] -> test
         vector<char> tester(str.begin(), str.end());
