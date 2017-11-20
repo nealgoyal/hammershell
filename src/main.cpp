@@ -113,14 +113,15 @@ int main() {
             if(orig.at(i) == "(") {
                 i--;
                 fin.push_back(orig.at(i));
-       if(count >= 2) {
-          vector<string> orig;
-          for(unsigned i = 0; i < oldstr3.length(); ++i) {
-                if(oldstr3.at(i) == '(') {
-                    oldstr3.insert(i + 1, " ");
-                    i++;
-                }
-          }
+        string str1 = oldstr3;
+        if(count >= 2) {
+            vector<string> orig;
+            for(unsigned i = 0; i < oldstr3.length(); ++i) {
+                    if(oldstr3.at(i) == '(') {
+                        oldstr3.insert(i + 1, " ");
+                        i++;
+                    }
+            }
 
             for(unsigned i = 0; i < oldstr3.length(); ++i) {
                   if(oldstr3.at(i) == ')') {
@@ -177,6 +178,7 @@ int main() {
 
             string str1 = boost::join(fin, " ");
           }
+
           // cout << str1 << endl;
 
 
@@ -206,6 +208,61 @@ int main() {
         for(unsigned i = 0; i < orig.size(); ++i) {
             if(orig.at(i) == "(") {
                 break;
+            Command* cmd = new Command();
+            cmd->setComVector(str1);
+
+            // cout << "\nCommands:" << endl;
+            // cmd->display();
+            Connector* cntr = new Connector();
+            cntr->setConVector(str1);
+
+            // cout << "\nConnectors:" << endl;
+            // cntr->display();
+
+            //Turn these pointers into vectors
+            std::vector<char*> connector = cntr->getConVectorReversed();
+            std::vector<char*> command = cmd->getComVectorReversed();
+
+            // std::cout << "First command: " << command.at(0) << std::endl;
+            // Always initialize root to the first command
+            Command* left = new Command(command);
+            Base* root = left;
+            // std::cout << "Command 1: " << left->getData() << endl;
+            command.pop_back();
+            Connector* leftSide = NULL;
+
+            std::string conType = "";
+            std::string andStr = "&&";
+            std::string orStr = "||";
+            std::string semiStr = ";";
+
+            // Sets first connector when command is the lhs
+            if(connector.size() != 0) {
+                Command* right = new Command(command);
+                // std::cout << "Command 2: " << right->getData() << endl;
+                command.pop_back();
+
+                // Points at last c_string in connector
+                conType = connector.back();
+                connector.pop_back();
+                // cout << "conType: " << conType << endl;
+
+                // Checks which connector is passed in.
+                // Sets lhs to command and rhs to command(if it exists).
+                // root = createTree(left, right, leftSide, conType);
+                if(conType == semiStr) {
+                    SEMICOLON* semiCon = new SEMICOLON(left, right);
+                    leftSide = semiCon;
+                    root = semiCon;
+                } else if(conType == andStr) {
+                    AND* andCon = new AND(left, right);
+                    leftSide = andCon;
+                    root = andCon;
+                } else if(conType == orStr) {
+                    OR* orCon = new OR(left, right);
+                    leftSide = orCon;
+                    root = orCon;
+                }
             }
             fin.push_back(orig.at(i));
         }
