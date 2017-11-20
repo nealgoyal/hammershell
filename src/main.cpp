@@ -36,15 +36,15 @@ int main() {
                 ++count;
             }
             if(oldstr2.at(i) == ')') {
-                --count;
-                if(count < 0) {
+                ++count;
+                if(count % 2 != 0) {
                     // perror("bash: syntax error near unexpected token ')'");
                     cout << "bash: syntax error near unexpected token ')'" << endl;
                     exit(1);
                 }
             }
         }
-        if(count > 0) {
+        if(count % 2 != 0) {
             cout << "bash: syntax error near unexpected token '('" << endl;
             exit(1);
         }
@@ -72,70 +72,70 @@ int main() {
             }
         }
        //--------------------------------------------------------------------------------------------
-
-        vector<string> orig;
-
-        for(unsigned i = 0; i < oldstr3.length(); ++i) {
-              if(oldstr3.at(i) == '(') {
-                  oldstr3.insert(i + 1, " ");
-                  i++;
-              }
-        }
-
+       if(count >= 2) {
+          vector<string> orig;
           for(unsigned i = 0; i < oldstr3.length(); ++i) {
-                if(oldstr3.at(i) == ')') {
-                    oldstr3.insert(i, " ");
+                if(oldstr3.at(i) == '(') {
+                    oldstr3.insert(i + 1, " ");
                     i++;
                 }
           }
 
-          typedef vector< string > split_vector_type;
-          split_vector_type cnts;
-          split( cnts, oldstr3, is_any_of(" "), token_compress_on );
-          for(unsigned i = 0; i < cnts.size(); ++i) {
-              orig.push_back(cnts.at(i));
-          }
-
-          vector<string> fin;
-          fin.reserve(orig.size() * 5);
-
-          for(int i = 0; i < orig.size(); ++i) {
-              if(orig.at(i) == "(") {
-                  i++;
-                  while(orig.at(i) != ")") {
-                            fin.push_back(orig.at(i));
-                            i++;
+            for(unsigned i = 0; i < oldstr3.length(); ++i) {
+                  if(oldstr3.at(i) == ')') {
+                      oldstr3.insert(i, " ");
+                      i++;
                   }
-              }
-          }
+            }
 
-          for(int i = orig.size() - 1; i >= 0; --i) {
-              if(orig.at(i) == "(") {
-                  i--;
-                  fin.push_back(orig.at(i));
-              }
-          }
+            typedef vector< string > split_vector_type;
+            split_vector_type cnts;
+            split( cnts, oldstr3, is_any_of(" "), token_compress_on );
+            for(unsigned i = 0; i < cnts.size(); ++i) {
+                orig.push_back(cnts.at(i));
+            }
 
-          for(int i = 0; i < orig.size(); ++i) {
-              if(orig.at(i) == "(") {
-                  break;
-              }
-              fin.push_back(orig.at(i));
-          }
+            vector<string> fin;
+            fin.reserve(orig.size() * 5);
 
-          fin.pop_back();
-
-          for(int i = 0; i < orig.size(); ++i) {
-              if(orig.at(i) == ")") {
-                  i++;
-                  while(i < orig.size()) {
-                    fin.push_back(orig.at(i));
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == "(") {
                     i++;
-                  }
-              }
-          }
+                    while(orig.at(i) != ")") {
+                              fin.push_back(orig.at(i));
+                              i++;
+                    }
+                }
+            }
 
-          string str1 = boost::join(fin, " ");
+            for(int i = orig.size() - 1; i >= 0; --i) {
+                if(orig.at(i) == "(") {
+                    i--;
+                    fin.push_back(orig.at(i));
+                }
+            }
+
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == "(") {
+                    break;
+                }
+                fin.push_back(orig.at(i));
+            }
+
+            fin.pop_back();
+
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == ")") {
+                    i++;
+                    while(i < orig.size()) {
+                      fin.push_back(orig.at(i));
+                      i++;
+                    }
+                }
+            }
+
+            string str1 = boost::join(fin, " ");
+          }
           // cout << str1 << endl;
 
 
