@@ -62,7 +62,7 @@ int main() {
         //     // str.insert(0, temp + " ");
         //     // cout << "String after reinsertion: " << str << endl;
         // }
-        
+
         if(str.find('(') == std::string::npos) {
             //----------------------------------------------
             //parsing for any [] -> test
@@ -114,7 +114,7 @@ int main() {
             // std::cout << "Command 1: " << left->getData() << endl;
             command.pop_back();
             Connector* leftSide = NULL;
-        
+
             std::string conType = "";
             std::string andStr = "&&";
             std::string orStr = "||";
@@ -189,7 +189,7 @@ int main() {
             cout << "Original string after removal of parentheses: " << str << endl << endl;
             // str.insert(0, temp + " ");
             // cout << "String after reinsertion: " << str << endl;
-        } 
+        }
     }
     return 0;
 }
