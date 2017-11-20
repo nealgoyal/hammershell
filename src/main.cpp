@@ -72,6 +72,7 @@ int main() {
             }
         }
        //--------------------------------------------------------------------------------------------
+       string str1 = oldstr3;
        if(count >= 2) {
           vector<string> orig;
           for(unsigned i = 0; i < oldstr3.length(); ++i) {
@@ -136,6 +137,7 @@ int main() {
 
             string str1 = boost::join(fin, " ");
           }
+
           // cout << str1 << endl;
 
 
@@ -160,14 +162,14 @@ int main() {
                 Exit *bye = new Exit();
                 bye->execute();
             }
-
             Command* cmd = new Command();
             cmd->setComVector(str1);
+
             // cout << "\nCommands:" << endl;
             // cmd->display();
-
             Connector* cntr = new Connector();
             cntr->setConVector(str1);
+
             // cout << "\nConnectors:" << endl;
             // cntr->display();
 
