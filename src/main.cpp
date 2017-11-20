@@ -36,15 +36,15 @@ int main() {
                 ++count;
             }
             if(oldstr2.at(i) == ')') {
-                --count;
-                if(count < 0) {
+                ++count;
+                if(count % 2 != 0) {
                     // perror("bash: syntax error near unexpected token ')'");
                     cout << "bash: syntax error near unexpected token ')'" << endl;
                     exit(1);
                 }
             }
         }
-        if(count > 0) {
+        if(count % 2 != 0) {
             cout << "bash: syntax error near unexpected token '('" << endl;
             exit(1);
         }
@@ -113,6 +113,93 @@ int main() {
             if(orig.at(i) == "(") {
                 i--;
                 fin.push_back(orig.at(i));
+       if(count >= 2) {
+          vector<string> orig;
+          for(unsigned i = 0; i < oldstr3.length(); ++i) {
+                if(oldstr3.at(i) == '(') {
+                    oldstr3.insert(i + 1, " ");
+                    i++;
+                }
+          }
+
+            for(unsigned i = 0; i < oldstr3.length(); ++i) {
+                  if(oldstr3.at(i) == ')') {
+                      oldstr3.insert(i, " ");
+                      i++;
+                  }
+            }
+
+            typedef vector< string > split_vector_type;
+            split_vector_type cnts;
+            split( cnts, oldstr3, is_any_of(" "), token_compress_on );
+            for(unsigned i = 0; i < cnts.size(); ++i) {
+                orig.push_back(cnts.at(i));
+            }
+
+            vector<string> fin;
+            fin.reserve(orig.size() * 5);
+
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == "(") {
+                    i++;
+                    while(orig.at(i) != ")") {
+                              fin.push_back(orig.at(i));
+                              i++;
+                    }
+                }
+            }
+
+            for(int i = orig.size() - 1; i >= 0; --i) {
+                if(orig.at(i) == "(") {
+                    i--;
+                    fin.push_back(orig.at(i));
+                }
+            }
+
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == "(") {
+                    break;
+                }
+                fin.push_back(orig.at(i));
+            }
+
+            fin.pop_back();
+
+            for(int i = 0; i < orig.size(); ++i) {
+                if(orig.at(i) == ")") {
+                    i++;
+                    while(i < orig.size()) {
+                      fin.push_back(orig.at(i));
+                      i++;
+                    }
+                }
+            }
+
+            string str1 = boost::join(fin, " ");
+          }
+          // cout << str1 << endl;
+
+
+            // Attempt 1: insert contents of parenthesis in front of entire string
+            // Note: This will not work properly. Must find a way to parse string inside parentheses
+            // Possible solution: Base* buildTree(Base* left, Base* right, &string)
+            // Pass in temp string. Return Base* root node and update temp string inside
+
+            // Checks if we need to deal with precedence
+            // if(str.find('(') != std::string::npos) {
+            //     std::size_t leftParenth = str.find('(');
+            //     std::size_t rightParenth = str.rfind(')');
+            //     std::string temp = str.substr(leftParenth + 1, rightParenth - (leftParenth + 1));
+            //     cout << "Original string: " << str << endl;
+            //     cout << "String in Parentheses: " << temp << endl;
+            //     str.erase(leftParenth, (rightParenth + 1) - leftParenth );
+            //     cout << "Original string after removal of parentheses: " << str << endl << endl;
+            //     // str.insert(0, temp + " ");
+            //     // cout << "String after reinsertion: " << str << endl;
+            // }
+            if(str1 == "exit") {
+                Exit *bye = new Exit();
+                bye->execute();
             }
         }
 
