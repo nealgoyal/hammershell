@@ -58,6 +58,10 @@ void Connector::setConVector(std::string str1) {
     }
 }
 
+std::vector<char*> Connector::getConVector() {
+    return cntr;
+}
+
 std::vector<char*> Connector::getConVectorReversed() {
     // for(unsigned i = 0; i < cntr.size(); ++i) {
     //     revCntr.push_back(cntr.end());

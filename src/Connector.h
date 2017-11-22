@@ -18,6 +18,7 @@ public:
     Connector();
     Connector(Base*, Base*);
     void setConVector(std::string);
+    std::vector<char*> getConVector();
     std::vector<char*> getConVectorReversed();
     virtual bool execute();
     void display();
