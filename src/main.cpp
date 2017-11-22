@@ -16,7 +16,7 @@ using namespace boost;
 // Traverse and print the tree in inorder notation
 // void displayTree() const;
 
-// Base* createTree(Base*, Base*, Base*, std::string);
+//  Base* createTree(Base*, Base*, Base*, std::string);
 
 int main() {
     while(true) {
