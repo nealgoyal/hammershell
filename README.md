@@ -38,21 +38,21 @@ In this lab, we used scripts to thoroughly test all the commands.
   commented_command.sh     #tests commands with comments
   test_test.sh             #tests the Test command
   precedence_test.sh       #tests if precedence is accounted for ()
-  exit.sh
+  exit.sh                  #tests the Exit command
 ```
 
 ## Running RShell
 ```c++
 $ git clone  https://github.com/cs100/rshell-just-kneel.git
 $ cd rshell-just-kneel
-$ git checkout assn2
+$ git checkout assn3
 $ make
 $ bin/rshell
 ```
 
 ## Known Bugs
-- We currently cannot account for non bin items, such as commands like "cd".
-- Issues with shell scripts running accordingly to each test.
+- We currently cannot account for non bin items, such as commands like "cd"
+- Issues with shell scripts running accordingly to each test
 - Cannot account for quotations within the commands
 - Will run with a connector at the end of the program
-- Cannot account for precedence according to parentheses
+- Cannot account for multiple parenthesis

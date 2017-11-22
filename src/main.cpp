@@ -89,7 +89,7 @@ int main() {
             str1 = string(tester.begin(), tester.end());
 
             //--------------------------------------------------------------------------------------------
-        
+   
             if(str1 == "exit") {
                 Exit *bye = new Exit();
                 bye->execute();
