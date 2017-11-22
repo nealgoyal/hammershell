@@ -16,7 +16,7 @@ using namespace boost;
 // Traverse and print the tree in inorder notation
 // void displayTree() const;
 
-//  Base* createTree(Base*, Base*, Base*, std::string);
+// Base* createTree(Base*, Base*, Base*, std::string);
 
 int main() {
     while(true) {
@@ -52,6 +52,16 @@ int main() {
 
         //--------------------------------------------------------------------------------------------
         //parsing for any [] -> test
+
+        // Inserts "test " before the flag if there are brackets[]
+        for(unsigned i = 0; i < oldstr2.length(); ++i) {
+            if(oldstr2[i] == '-' && oldstr2[i - 2] == '[') {
+                oldstr2.insert(i, "test ");
+                // break;
+            }
+        }
+
+        // Removes the brackets[] from the string
         vector<char> tester(oldstr2.begin(), oldstr2.end());
         for(unsigned i = 0; i < tester.size(); ++i) {
             if(tester.at(i) == '[') {
@@ -63,35 +73,30 @@ int main() {
                 }
             }
         }
+        // Now contains string as if test was used instead of brackets[]
+        oldstr2 = string(tester.begin(), tester.end());
 
-        string oldstr3 = string(tester.begin(), tester.end());
-        for(unsigned i = 0; i < oldstr3.length(); ++i) {
-            if(oldstr3[i] == '-') {
-                oldstr3.insert(i, "test ");
-                break;
-            }
-        }
        //--------------------------------------------------------------------------------------------
-       string str1 = oldstr3;
+       string str1 = oldstr2;
        if(count >= 2) {
           vector<string> orig;
-          for(unsigned i = 0; i < oldstr3.length(); ++i) {
-                if(oldstr3.at(i) == '(') {
-                    oldstr3.insert(i + 1, " ");
+          for(unsigned i = 0; i < oldstr2.length(); ++i) {
+                if(oldstr2.at(i) == '(') {
+                    oldstr2.insert(i + 1, " ");
                     i++;
                 }
           }
 
-            for(unsigned i = 0; i < oldstr3.length(); ++i) {
-                  if(oldstr3.at(i) == ')') {
-                      oldstr3.insert(i, " ");
+            for(unsigned i = 0; i < oldstr2.length(); ++i) {
+                  if(oldstr2.at(i) == ')') {
+                      oldstr2.insert(i, " ");
                       i++;
                   }
             }
 
             typedef vector< string > split_vector_type;
             split_vector_type cnts;
-            split( cnts, oldstr3, is_any_of(" "), token_compress_on );
+            split( cnts, oldstr2, is_any_of(" "), token_compress_on );
             for(unsigned i = 0; i < cnts.size(); ++i) {
                 orig.push_back(cnts.at(i));
             }
@@ -99,7 +104,7 @@ int main() {
             vector<string> fin;
             fin.reserve(orig.size() * 5);
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == "(") {
                     i++;
                     while(orig.at(i) != ")") {
@@ -109,14 +114,14 @@ int main() {
                 }
             }
 
-            for(int i = orig.size() - 1; i >= 0; --i) {
+            for(unsigned i = orig.size() - 1; i >= 0; --i) {
                 if(orig.at(i) == "(") {
                     i--;
                     fin.push_back(orig.at(i));
                 }
             }
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == "(") {
                     break;
                 }
@@ -125,7 +130,7 @@ int main() {
 
             fin.pop_back();
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == ")") {
                     i++;
                     while(i < orig.size()) {
@@ -139,7 +144,6 @@ int main() {
           }
 
           // cout << str1 << endl;
-
 
             // Attempt 1: insert contents of parenthesis in front of entire string
             // Note: This will not work properly. Must find a way to parse string inside parentheses
