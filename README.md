@@ -38,7 +38,7 @@ In this lab, we used scripts to thoroughly test all the commands.
   commented_command.sh     #tests commands with comments
   test_test.sh             #tests the Test command
   precedence_test.sh       #tests if precedence is accounted for ()
-  exit.sh
+  exit.sh                  #tests the Exit command
 ```
 
 ## Running RShell
