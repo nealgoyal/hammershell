@@ -16,7 +16,6 @@ using namespace boost;
 // Traverse and print the tree in inorder notation
 // void displayTree() const;
 
-// Base* createTree(Base**, Base**, Base**, std::string);
 Base* createTree(Base*, Connector* &, Command* &, std::string);
 
 int main() {
@@ -26,6 +25,10 @@ int main() {
         std::getline(std::cin, oldstr1);
 
         std::string str1 = oldstr1.substr(0, oldstr1.find("#", 0));
+        if(str1 == "exit") {
+            Exit *bye = new Exit();
+            bye->execute();
+        }
 
         int count = 0;
         //--------------------------------------------------------------------------------------------
@@ -90,10 +93,10 @@ int main() {
 
             //--------------------------------------------------------------------------------------------
    
-            if(str1 == "exit") {
-                Exit *bye = new Exit();
-                bye->execute();
-            }
+            // if(str1 == "exit") {
+            //     Exit *bye = new Exit();
+            //     bye->execute();
+            // }
             Command* cmd = new Command();
             cmd->setComVector(str1);
 
@@ -207,10 +210,10 @@ int main() {
 
             //--------------------------------------------------------------------------------------------
         
-            if(str1 == "exit") {
-                Exit *bye = new Exit();
-                bye->execute();
-            }
+            // if(str1 == "exit") {
+            //     Exit *bye = new Exit();
+            //     bye->execute();
+            // }
 
             Command* cmd = new Command();
             Command* cmd1 = new Command();
@@ -251,7 +254,7 @@ int main() {
             Command* left1 = new Command(command1);
             Base* root = NULL; // Root pointer to top connector
             Base* leftTree = left; // Root pointer to left tree
-            Base* rightTree = left; // Root pointer to right tree
+            Base* rightTree = left1; // Root pointer to right tree
             command.pop_back();
             command1.pop_back();
             Connector* leftSide = NULL;
