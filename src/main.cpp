@@ -113,7 +113,10 @@ int main() {
             if(orig.at(i) == "(") {
                 i--;
                 fin.push_back(orig.at(i));
-        string str1 = oldstr3;
+            }
+            string str1 = oldstr3;
+        }
+        
         if(count >= 2) {
             vector<string> orig;
             for(unsigned i = 0; i < oldstr3.length(); ++i) {
@@ -124,10 +127,10 @@ int main() {
             }
 
             for(unsigned i = 0; i < oldstr3.length(); ++i) {
-                  if(oldstr3.at(i) == ')') {
-                      oldstr3.insert(i, " ");
-                      i++;
-                  }
+                if(oldstr3.at(i) == ')') {
+                    oldstr3.insert(i, " ");
+                    i++;
+                }
             }
 
             typedef vector< string > split_vector_type;
@@ -140,24 +143,24 @@ int main() {
             vector<string> fin;
             fin.reserve(orig.size() * 5);
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == "(") {
                     i++;
                     while(orig.at(i) != ")") {
-                              fin.push_back(orig.at(i));
-                              i++;
+                            fin.push_back(orig.at(i));
+                            i++;
                     }
                 }
             }
 
-            for(int i = orig.size() - 1; i >= 0; --i) {
+            for(unsigned i = orig.size() - 1; i >= 0; --i) {
                 if(orig.at(i) == "(") {
                     i--;
                     fin.push_back(orig.at(i));
                 }
             }
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == "(") {
                     break;
                 }
@@ -166,18 +169,18 @@ int main() {
 
             fin.pop_back();
 
-            for(int i = 0; i < orig.size(); ++i) {
+            for(unsigned i = 0; i < orig.size(); ++i) {
                 if(orig.at(i) == ")") {
                     i++;
                     while(i < orig.size()) {
-                      fin.push_back(orig.at(i));
-                      i++;
+                    fin.push_back(orig.at(i));
+                    i++;
                     }
                 }
             }
 
             string str1 = boost::join(fin, " ");
-          }
+        }
 
           // cout << str1 << endl;
 
