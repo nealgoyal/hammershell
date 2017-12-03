@@ -8,6 +8,11 @@
 #include "OR.h"
 #include "SEMICOLON.h"
 
+#include "InputRedirect.h"
+#include "OutputRedirect.h"
+#include "DoubleOutputRedirect.h"
+#include "Pipe.h"
+
 #include <boost/algorithm/string.hpp>
 #include <vector>
 using namespace std;
@@ -92,7 +97,7 @@ int main() {
             str1 = string(tester.begin(), tester.end());
 
             //--------------------------------------------------------------------------------------------
-   
+
             // if(str1 == "exit") {
             //     Exit *bye = new Exit();
             //     bye->execute();
@@ -118,6 +123,11 @@ int main() {
             std::string orStr = "||";
             std::string semiStr = ";";
 
+            std::string inpStr = "<";
+            std::string outStr = ">";
+            std::string doutStr = ">>";
+            std::string pipeStr = "|";
+
             // Sets first connector when command is the lhs
             if(connector.size() != 0) {
                 Command* right = new Command(command);
@@ -142,6 +152,22 @@ int main() {
                     OR* orCon = new OR(left, right);
                     leftSide = orCon;
                     root = orCon;
+                } else if(conType == inpStr) {
+                    InputRedirect* inpCon = new InputRedirect(left, right);
+                    leftSide = inpCon;
+                    root = inpCon;
+                } else if(conType == outStr) {
+                    OutputRedirect* outCon = new OutputRedirect(left, right);
+                    leftSide = outCon;
+                    root = outCon;
+                } else if(conType == doutStr) {
+                    DoubleOutputRedirect* doutCon = new DoubleOutputRedirect(left, right);
+                    leftSide = doutCon;
+                    root = doutCon;
+                } else if(conType == pipeStr) {
+                    Pipe* pipeCon = new Pipe(left, right);
+                    leftSide = pipeCon;
+                    root = pipeCon;
                 }
             }
 
@@ -209,7 +235,7 @@ int main() {
             rightString = string(tester1.begin(), tester1.end());
 
             //--------------------------------------------------------------------------------------------
-        
+
             // if(str1 == "exit") {
             //     Exit *bye = new Exit();
             //     bye->execute();
@@ -240,6 +266,11 @@ int main() {
             std::string andStr = "&&";
             std::string orStr = "||";
             std::string semiStr = ";";
+
+            std::string inpStr = "<";
+            std::string outStr = ">";
+            std::string doutStr = ">>";
+            std::string pipeStr = "|";
 
             // Sets first connector when command is the lhs
             if(connector.size() != 0) { // NEED TO REMOVE LAST CONNECTOR FROM STRING 1
@@ -284,6 +315,22 @@ int main() {
                     OR* orCon = new OR(left, right);
                     leftSide = orCon;
                     leftTree = orCon;
+                } else if(conType == inpStr) {
+                    InputRedirect* inpCon = new InputRedirect(left, right);
+                    leftSide = inpCon;
+                    leftTree = inpCon;
+                } else if(conType == outStr) {
+                    OutputRedirect* outCon = new OutputRedirect(left, right);
+                    leftSide = outCon;
+                    leftTree = outCon;
+                } else if(conType == doutStr) {
+                    DoubleOutputRedirect* doutCon = new DoubleOutputRedirect(left, right);
+                    leftSide = doutCon;
+                    leftTree = doutCon;
+                } else if(conType == pipeStr) {
+                    Pipe* pipeCon = new Pipe(left, right);
+                    leftSide = pipeCon;
+                    leftTree = pipeCon;
                 }
             }
             // Sets first connector when command is the lhs
@@ -310,6 +357,22 @@ int main() {
                     OR* orCon1 = new OR(left1, right1);
                     leftSide1 = orCon1;
                     rightTree = orCon1;
+                } else if(conType1 == inpStr) {
+                    InputRedirect* inpCon1 = new InputRedirect(left1, right1);
+                    leftSide = inpCon1;
+                    root = inpCon1;
+                } else if(conType1 == outStr) {
+                    OutputRedirect* outCon1 = new OutputRedirect(left1, right1);
+                    leftSide = outCon1;
+                    root = outCon1;
+                } else if(conType1 == doutStr) {
+                    DoubleOutputRedirect* doutCon1 = new DoubleOutputRedirect(left1, right1);
+                    leftSide = doutCon1;
+                    root = doutCon1;
+                } else if(conType1 == pipeStr) {
+                    Pipe* pipeCon1 = new Pipe(left1, right1);
+                    leftSide = pipeCon1;
+                    root = pipeCon1;
                 }
             }
 
@@ -339,7 +402,7 @@ int main() {
                 // Sets lhs to connector and rhs to command(if it exists).
                 rightTree = createTree(rightTree, leftSide1, rightSide1, conType1);
             }
-            
+
             // Finally, discover the last connector and create a new root from it
             // Checks which connector is passed in.
             if(lastConType == semiStr) {
@@ -351,6 +414,18 @@ int main() {
             } else if(lastConType == orStr) {
                 OR* orCon = new OR(leftTree, rightTree);
                 root = orCon;
+            }  else if(lastConType == inpStr) {
+                InputRedirect* inpCon = new InputRedirect(leftTree, rightTree);
+                root = inpCon;
+            } else if(lastConType == outStr) {
+                OutputRedirect* outCon = new OutputRedirect(leftTree, rightTree);
+                root = outCon;
+            } else if(lastConType == doutStr) {
+                DoubleOutputRedirect* doutCon = new DoubleOutputRedirect(leftTree, rightTree);
+                root = doutCon;
+            } else if(lastConType == pipeStr) {
+                Pipe* pipeCon = new Pipe(leftTree, rightTree);
+                root = pipeCon;
             }
             root->execute();
         }
