@@ -18,7 +18,7 @@
 using namespace std;
 using namespace boost;
 
-// class AND : public Connector {
+// class InputRedirect : public Connector {
 //  public:
 
 // Default Constructor
@@ -26,7 +26,7 @@ InputRedirect::InputRedirect() : Connector() {
     data = "";
 }
 
-// Constructor: Sets the left and right-hand sides of the AND connector.
+// Constructor: Sets the left and right-hand sides of the < connector.
 InputRedirect::InputRedirect(Base* left, Base* right) {
     lhs = left;
     rhs = right;
