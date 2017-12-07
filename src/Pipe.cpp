@@ -70,15 +70,11 @@ bool Pipe::execute() {
     if(pipe(fds) == -1) {
         return false;
     }
-    cout << "Made pipe" << endl;
     pid_t pid = fork();
     if(pid == 0) {
-        cout << "Entered child process" << endl;
         close(fds[0]);
-        cout << "Closed unused half of lhs" << endl;
         // Outputs lhs to fds[1] instead of stdout;
         if(dup2(fds[1], 1) == -1) {
-            cout << "Dup2 failed" << endl;
             close(fds[1]);
             exit(1);
         }
@@ -86,38 +82,28 @@ bool Pipe::execute() {
             close(fds[1]);
             exit(1);
         }
-        cout << "Duplicated new input" << endl;
         close(fds[1]);
-        cout << "Closed fds[1]" << endl;
         exit(0);
     } else if(pid > 0) { // Parent Process
-        cout << "Entered parent process" << endl;
         close(fds[1]);
-        cout << "Closed unused half of rhs" << endl;
         int status;
         waitpid(pid, &status, 0);
         if(WEXITSTATUS(status) == 1) {
             return false;
         }
-        cout << "Child terminated" << endl;
-        // Sends output through as new input and outputs to stdout
         int userInput = dup(0);
-        cout << "Stores stdin" << endl;
         if(dup2(fds[0], 0) == -1) {
             close(fds[0]);
             dup2(userInput, 0);
             close(userInput);
             return false;
         }
-        cout << "Duplicates input" << endl;
         if(rhs->execute() == false) {
-            cout << "Couldn't execute rhs" << endl;
             close(fds[0]);
             dup2(userInput, 0);
             close(userInput);
             return false;
         }
-        cout << "Executed rhs" << endl;
         close(fds[0]);
         dup2(userInput, 0);
         close(userInput);
