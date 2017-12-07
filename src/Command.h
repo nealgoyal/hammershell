@@ -20,10 +20,10 @@ class Command : public Base {
  public:
     Command();
     Command(vector<char*>);
-    virtual string getData();    
     void setComVector(std::string);
     std::vector<char*> getComVectorReversed();
     virtual bool execute();
+    std::string getData();    
     bool testCommand();
     void display();
 };
