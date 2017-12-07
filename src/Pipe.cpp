@@ -62,8 +62,7 @@ void Pipe::setpipeVector(std::string str1) {
     }
 }
 
-// Executes right side if left side DOES execute.
-// Returns true if right side executes.
+// Executes left side and passes it into the right side as input
 bool Pipe::execute() {
     int fds[2];
 
