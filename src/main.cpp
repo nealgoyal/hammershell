@@ -135,6 +135,7 @@ int main() {
 
                 // Points at last c_string in connector
                 conType = connector.back();
+                // cout << "conType: " << conType << endl;
                 connector.pop_back();
                 // cout << "conType: " << conType << endl;
 
@@ -429,7 +430,6 @@ int main() {
             }
             root->execute();
         }
-        // root->execute();
     }
     return 0;
 }
@@ -440,6 +440,10 @@ Base* createTree(Base* root, Connector* &left, Command* &right, std::string conT
     std::string andStr = "&&";
     std::string orStr = "||";
     std::string semiStr = ";";
+    std::string inpStr = "<";
+    std::string outStr = ">";
+    std::string doutStr = ">>";
+    std::string pipeStr = "|";
 
     if(conType == semiStr) {
         SEMICOLON* semiCon = new SEMICOLON(left, right);
@@ -453,6 +457,22 @@ Base* createTree(Base* root, Connector* &left, Command* &right, std::string conT
         OR* orCon = new OR(left, right);
         left = orCon;
         root = orCon;
+    } else if(conType == inpStr) {
+        InputRedirect* inpCon = new InputRedirect(left, right);
+        left = inpCon;
+        root = inpCon;
+    } else if(conType == outStr) {
+        OutputRedirect* outCon = new OutputRedirect(left, right);
+        left = outCon;
+        root = outCon;
+    } else if(conType == doutStr) {
+        DoubleOutputRedirect* doutCon = new DoubleOutputRedirect(left, right);
+        left = doutCon;
+        root = doutCon;
+    } else if(conType == pipeStr) {
+        Pipe* pipeCon = new Pipe(left, right);
+        left = pipeCon;
+        root = pipeCon;
     }
     return root;
 }
