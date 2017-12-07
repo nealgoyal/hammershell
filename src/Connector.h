@@ -20,9 +20,8 @@ public:
     void setConVector(std::string);
     std::vector<char*> getConVector();
     std::vector<char*> getConVectorReversed();
-    virtual bool execute();
+    virtual bool execute() = 0;
     void display();
-    // void inOrder(Connector*) const;
 };
 
 #endif
