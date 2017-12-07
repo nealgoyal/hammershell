@@ -8,7 +8,9 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
@@ -33,44 +35,48 @@ InputRedirect::InputRedirect(Base* left, Base* right) {
 
 void InputRedirect::setinpVector(std::string str1) {
 
-  std::string str2 = " ";
-  for(unsigned i = 0; i < str1.length(); ++i) {
-      if(str1.at(i) == ';') {
-        str1.insert(i, str2);
-        i++;
-      }
-  }
-
-  typedef vector< string > split_vector_type;
-
-  split_vector_type cnts;
-  split( cnts, str1, is_any_of(" "), token_compress_on );
-  for(unsigned i = 0; i < cnts.size(); ++i) {
-      inps.push_back(cnts.at(i));
-  }
-
-  for(unsigned i = 0; i < inps.size(); ++i ) {
-    if(inps.at(i) == "<") {
-        tempIR.push_back(inps.at(i));
-    }
-  }
-
-  inpV.reserve(tempIR.size());
-  for(unsigned index = 0; index < tempIR.size(); ++index) {
-      inpV.push_back((char*)tempIR[index].c_str());
-  }
-}
-
-// Executes right side if left side DOES execute.
-// Returns true if right side executes.
-bool InputRedirect::execute() {
-    if(lhs->execute()) {
-        if(rhs->execute()) {
-            return true;
+    std::string str2 = " ";
+    for(unsigned i = 0; i < str1.length(); ++i) {
+        if(str1.at(i) == ';') {
+            str1.insert(i, str2);
+            i++;
         }
+    }
+
+    typedef vector< string > split_vector_type;
+
+    split_vector_type cnts;
+    split( cnts, str1, is_any_of(" "), token_compress_on );
+    for(unsigned i = 0; i < cnts.size(); ++i) {
+        inps.push_back(cnts.at(i));
+    }
+
+    for(unsigned i = 0; i < inps.size(); ++i ) {
+        if(inps.at(i) == "<") {
+            tempIR.push_back(inps.at(i));
+        }
+    }
+
+    inpV.reserve(tempIR.size());
+    for(unsigned index = 0; index < tempIR.size(); ++index) {
+        inpV.push_back((char*)tempIR[index].c_str());
+    }
+    }
+
+// Passes in rhs as input and standard output(1)
+// Calls execute on lhs to execute the actual command.
+bool InputRedirect::execute() {
+    int in = open((rhs->getData()).c_str(), O_RDONLY);
+    if(dup2(in, 0) == -1) {
+        close(in);
         return false;
     }
-    return false;
+    if(lhs->execute() == false) {
+        close(in);
+        return false;
+    }
+    close(in);
+    return true;
 }
 
 void InputRedirect::display() {
