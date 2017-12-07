@@ -45,8 +45,8 @@ In this lab, we used scripts to thoroughly test all the commands.
   exit.sh                  #tests the Exit command
   input_redirect_test.sh   #tests input redirection (<)
   output_redirect_test.sh  #tests single output redirection (>)
-  append_redirect_test.sh	 #tests double output redirection (>>)
-  pipe_test.sh					   #tests piping (|)
+  append_redirect_test.sh  #tests double output redirection (>>)
+  pipe_test.sh			   #tests piping (|)
 ```
 
 ## Running RShell
