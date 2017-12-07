@@ -8,7 +8,9 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
@@ -16,7 +18,7 @@
 using namespace std;
 using namespace boost;
 
-// class AND : public Connector {
+// class OutputRedirect : public Connector {
 //  public:
 
 // Default Constructor
@@ -24,7 +26,7 @@ OutputRedirect::OutputRedirect() : Connector() {
     data = "";
 }
 
-// Constructor: Sets the left and right-hand sides of the AND connector.
+// Constructor: Sets the left and right-hand sides of the > connector.
 OutputRedirect::OutputRedirect(Base* left, Base* right) {
     lhs = left;
     rhs = right;
@@ -61,16 +63,38 @@ void OutputRedirect::setoutVector(std::string str1) {
   }
 }
 
-// Executes right side if left side DOES execute.
-// Returns true if right side executes.
+// Passes in rhs as input and standard output(1)
+// Calls execute on lhs to execute the actual command.
 bool OutputRedirect::execute() {
-    if(lhs->execute()) {
-        if(rhs->execute()) {
-            return true;
+    // Sets input to the rhs
+    int out = open((rhs->getData()).c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+    
+    pid_t pid = fork();
+    if(pid == 0) {
+        if(dup2(out, 1) == -1) {
+            close(out);
+            exit(1);
         }
-        return false;
+        if(lhs->execute() == false) {
+            close(out);
+            exit(1);
+        }
+        exit(0);
+    } else if(pid > 0) { // Parent Process
+        int status;
+        waitpid(pid, &status, 0);
+        if(WEXITSTATUS(status) == 1) {
+            return false;
+        }
+    } else {
+        // cout << "ENTERED PERR" << endl;
+        perror("Fork Failed"); // Failed
+        exit(1);
     }
-    return false;
+
+    close(out);
+
+    return true;
 }
 
 void OutputRedirect::display() {

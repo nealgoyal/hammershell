@@ -20,7 +20,8 @@ public:
     void setConVector(std::string);
     std::vector<char*> getConVector();
     std::vector<char*> getConVectorReversed();
-    virtual bool execute() = 0;
+    virtual bool execute();
+    virtual std::string getData();
     void display();
 };
 

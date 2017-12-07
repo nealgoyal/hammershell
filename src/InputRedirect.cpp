@@ -18,7 +18,7 @@
 using namespace std;
 using namespace boost;
 
-// class AND : public Connector {
+// class InputRedirect : public Connector {
 //  public:
 
 // Default Constructor
@@ -26,7 +26,7 @@ InputRedirect::InputRedirect() : Connector() {
     data = "";
 }
 
-// Constructor: Sets the left and right-hand sides of the AND connector.
+// Constructor: Sets the left and right-hand sides of the < connector.
 InputRedirect::InputRedirect(Base* left, Base* right) {
     lhs = left;
     rhs = right;
@@ -66,16 +66,25 @@ void InputRedirect::setinpVector(std::string str1) {
 // Passes in rhs as input and standard output(1)
 // Calls execute on lhs to execute the actual command.
 bool InputRedirect::execute() {
+    // Sets input to the rhs
     int in = open((rhs->getData()).c_str(), O_RDONLY);
+    // Makes a copy of the file descriptor of user input
+    int userInput = dup(0);
     if(dup2(in, 0) == -1) {
         close(in);
+        dup2(userInput, 0);
+        close(userInput);
         return false;
     }
     if(lhs->execute() == false) {
         close(in);
+        dup2(userInput, 0);
+        close(userInput);
         return false;
     }
     close(in);
+    dup2(userInput, 0);
+    close(userInput);
     return true;
 }
 
