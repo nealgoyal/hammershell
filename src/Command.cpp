@@ -26,11 +26,6 @@ Command::Command(vector<char*> input) {
     }
 }
 
-// Returns the data when pointed to in the main
-string Command::getData() {
-    return data;
-}
-
 // Takes in a char* and puts it into the vector of commands.
 void Command::setComVector(std::string str1) {
    
@@ -153,6 +148,11 @@ bool Command::execute() {
         return true;
     }
     return true;
+}
+
+// Returns the data when pointed to in the main
+std::string Command::getData() {
+    return data;
 }
 
 // Displays all of the contents of the vector of commands.
