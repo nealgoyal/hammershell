@@ -23,6 +23,10 @@ Need to install the boost library to run the program. To get instructions on how
 * "&&" executes the next command if the previous command succeeds.
 * ";" always executes the next command.
 * "#" turns everything following it into a comment.
+* "<" Has a command read in input from a file instead of the command prompt.
+* ">" Outputs the result of a command into a file instead of the command prompt(replaces file contents).
+* ">>" Appends the result of a command into a file instead of the command prompt.
+* "|" Takes the output from a command and reads it in as input for the command on the other side of the pipe.
 
 *The test command can be executed using "test" or "[]". This will print (True) if the input exists and (False) if it does not exist. The following flags can be specified for the Test Command:*
 * No flag: treat as if -e flag.
@@ -39,6 +43,10 @@ In this lab, we used scripts to thoroughly test all the commands.
   test_test.sh             #tests the Test command
   precedence_test.sh       #tests if precedence is accounted for ()
   exit.sh                  #tests the Exit command
+  input_redirect_test.sh   #tests input redirection (<)
+  output_redirect_test.sh  #tests single output redirection (>)
+  append_redirect_test.sh	 #tests double output redirection (>>)
+  pipe_test.sh					   #tests piping (|)
 ```
 
 ## Running RShell
@@ -56,3 +64,4 @@ $ bin/rshell
 - Cannot account for quotations within the commands
 - Will run with a connector at the end of the program
 - Cannot account for multiple parenthesis
+- Sometimes you will need to enter "exit" twice to exit
