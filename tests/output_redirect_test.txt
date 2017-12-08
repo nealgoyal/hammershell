@@ -1,5 +1,11 @@
 echo Testing Output Redirection
 
+echo Testing basic cases
+echo First > newFile
+cat newFile
+echo Second > newFile
+cat newFile
+
 echo Using Assn Ex:
 cat < existingInputFile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2
 
