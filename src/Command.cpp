@@ -129,23 +129,19 @@ bool Command::execute() {
             // Call execvp
             if(execvp(execArg[0], execArg) == -1) {
                 perror("Command not found");
-                return false;
+                exit(1);
             }
-            return true;
+            exit(0);
         } else if(pid > 0) { // Parent Process
-            // cout << "ENTERED PID" << endl;
             int status;
             waitpid(pid, &status, 0);
             if(WEXITSTATUS(status) == 1) {
-                // cout << "ENTERED STAT" << endl;
                 return false;
             }
         } else {
-            // cout << "ENTERED PERR" << endl;
             perror("Fork Failed"); // Failed
             exit(1);
         }
-        // cout << "DONE" << endl;
         return true;
     }
     return true;
