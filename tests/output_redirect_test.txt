@@ -1,2 +1,8 @@
 echo Testing Output Redirection
 
+echo Using Assn Ex:
+cat < existingInputFile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2
+
+echo Using I/O Redirection
+cat < makefile | tr a-z A-Z > newMakefile
+cat < newMakefile | tr A-Z a-z > makefile

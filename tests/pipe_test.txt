@@ -1,2 +1,5 @@
 echo Testing Piping
 
+cat words.txt | head -n 10
+ls | cat
+cat *.txt | grep 'x'

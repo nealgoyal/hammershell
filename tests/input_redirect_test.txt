@@ -1,2 +1,14 @@
 echo Testing Input Redirection
 
+echo Testing Input File:
+wc < words.txt
+wc words.txt
+cat < newFile1.txt
+
+echo Using piping/input
+cat words.txt | head -n 10
+head -n 10 < words.txt
+head -n 10 words.txt
+
+Echo Testing input/output
+command < input-file > output-file

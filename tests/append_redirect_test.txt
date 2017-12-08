@@ -1,2 +1,7 @@
 echo Testing Double Output Redirection
 
+echo Testing with a single file:
+cat newfile.txt
+Here is some text
+echo "and some more text" >> newfile.txt
+cat newfile.txt
