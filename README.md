@@ -64,4 +64,3 @@ $ bin/rshell
 - Cannot account for quotations within the commands
 - Will run with a connector at the end of the program
 - Cannot account for multiple parenthesis
-- Sometimes you will need to enter "exit" twice to exit
