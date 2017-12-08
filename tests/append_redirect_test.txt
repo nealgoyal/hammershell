@@ -1,7 +1,10 @@
 echo Testing Double Output Redirection
 
-echo Testing with a single file:
-cat newfile.txt
-Here is some text
-echo "and some more text" >> newfile.txt
-cat newfile.txt
+echo Testing with basic case:
+echo This is a new file > newfile
+echo New Line 1 >> newfile
+echo New Line 2 >> newfile
+
+echo Testing with single and double
+echo Reset newfile > newfile && echo appended to file >> newfile
+cat newfile > newfile2; echo append1 >> newfile2 && echo append2 >> newfile2

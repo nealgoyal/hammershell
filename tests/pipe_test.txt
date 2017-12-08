@@ -1,5 +1,12 @@
 echo Testing Piping
 
+echo Test Single Pipes
 cat words.txt | head -n 10
 ls | cat
 cat *.txt | grep 'x'
+
+echo Test Multiple Pipes
+ls | cat | tr a-z A-Z
+
+cat < makefile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2
+cat newOutputFile2
