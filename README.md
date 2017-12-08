@@ -53,7 +53,7 @@ In this lab, we used scripts to thoroughly test all the commands.
 ```c++
 $ git clone  https://github.com/cs100/rshell-just-kneel.git
 $ cd rshell-just-kneel
-$ git checkout assn3
+$ git checkout assn4
 $ make
 $ bin/rshell
 ```
