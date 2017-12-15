@@ -1,4 +1,4 @@
-# Hammershell Program
+# Hammer Shell
 ## Authors: Justin Schopick and Neal Goyal
 
 ## Project Description
@@ -51,9 +51,8 @@ In this lab, we used scripts to thoroughly test all the commands.
 
 ## Running RShell
 ```c++
-$ git clone  https://github.com/cs100/rshell-just-kneel.git
-$ cd rshell-just-kneel
-$ git checkout assn4
+$ git clone  https://github.com/nealgoyal/hammershell.git
+$ cd hammershell
 $ make
 $ bin/rshell
 ```
