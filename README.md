@@ -1,4 +1,4 @@
-# RShell Program
+# Hammershell Program
 ## Authors: Justin Schopick and Neal Goyal
 
 ## Project Description
@@ -14,7 +14,7 @@ This program will mimic a linux or unix terminal. The program will run by allowi
  $ ls -a; echo hello; mkdir test
 ```
 ## Requirements
-Need to install the boost library to run the program. To get instructions on how to install, follow the website here: https://www.pyimagesearch.com/2015/04/27/installing-boost-and-boost-python-on-osx-with-homebrew/. Also, you need to compile using C++11. In order to compile, you can either run our makefile or use the command
+Need to install the boost library to run the program. To get instructions on how to install, follow the website [here](https://www.pyimagesearch.com/2015/04/27/installing-boost-and-boost-python-on-osx-with-homebrew/). Also, you need to compile using C++11. In order to compile, you can either run our makefile or use the command
 ```c++
   $ g++ *.cpp -std=c++11
 ```
